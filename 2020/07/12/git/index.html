@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shuye.png">
+  <link rel="icon" type="image/png" href="/img/shuye.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="qingcai56">
+  <meta name="keywords" content="">
+  <title>git - qingcai56&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>八百物屋</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/astronaut.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="git">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-07-12 22:26" pubdate>
+        July 12, 2020 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      40
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">git</h1>
+            
+            <div class="markdown-body">
+              <h1 id="GIT（版本管理软件）"><a href="#GIT（版本管理软件）" class="headerlink" title="GIT（版本管理软件）"></a>GIT（版本管理软件）</h1><p>git只能管理各种文本信息文件，如（.txt/.py等等），像图片(.jpg,.doc则不能被管理).</p>
+<p>这是看莫烦Git系列视频个人所做笔记<a target="_blank" rel="noopener" href="https://morvanzhou.github.io/tutorials/others/git/1-1-why/">点击进入莫烦bolg</a></p>
+<h2 id="第一个版本库repository"><a href="#第一个版本库repository" class="headerlink" title="第一个版本库repository"></a>第一个版本库repository</h2><h3 id="1、常用命令"><a href="#1、常用命令" class="headerlink" title="1、常用命令"></a>1、常用命令</h3><p>1、<code>mkdir</code> 生成一个文件夹</p>
+<p>2、<code>cd</code>   cd ~ 返回根目录（普通用户和super用户不同）</p>
+<p>3、<code>pwd</code>显示当前目录 (目录不要含中文)</p>
+<h3 id="2、关键操作"><a href="#2、关键操作" class="headerlink" title="2、关键操作"></a>2、关键操作</h3><h4 id="创建版本库-init"><a href="#创建版本库-init" class="headerlink" title="创建版本库(init)"></a>创建版本库(init)</h4><ul>
+<li><p>创建用户<code>git config --global user.name &quot;qingcai56&quot;</code></p>
+</li>
+<li><p>为刚才创建的用户指定邮箱<code>git config --global user.email &quot;qc@email.com&quot;</code></p>
+</li>
+<li><p><code>config user.name和config user.email</code>查询用户</p>
+</li>
+<li><p><code>git init</code>生成git的管理文件</p>
+</li>
+<li><p><code>start git</code>打开git的管理文件</p>
+</li>
+</ul>
+<h4 id="添加文件管理（add）"><a href="#添加文件管理（add）" class="headerlink" title="添加文件管理（add）"></a>添加文件管理（add）</h4><ul>
+<li><code>touch  **.py/txt</code>创建一个文件</li>
+<li><code>git add **.py/txt</code>把文件加到git版本库之中</li>
+<li><code>git status</code>查看当前版本库的状态</li>
+<li><code>git add .</code>add所有程序</li>
+</ul>
+<h4 id="提交改变（commit）"><a href="#提交改变（commit）" class="headerlink" title="提交改变（commit）"></a>提交改变（commit）</h4><ul>
+<li><code>git commit -m &quot;create 1.py&quot;</code> 提交这次改变,引号之中为本次提交说明</li>
+<li><strong>可以多次add文件用commit一次可以提交多个文件</strong></li>
+</ul>
+<p><img src="./0.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="修改记录"><a href="#修改记录" class="headerlink" title="修改记录"></a>修改记录</h2><p>​        在git之中，每一次提交（commit）修改，都会被单独保存起来，就好像游戏通过某一关要保存存档一样</p>
+<h3 id="1、使用命令"><a href="#1、使用命令" class="headerlink" title="1、使用命令"></a>1、使用命令</h3><p>1、<code>git log</code> 查看之前所有的修改记录</p>
+<p>2、<code>git satus</code>查看当前文件的状态</p>
+<p>3、<code>git diff</code>比较修改后的状态<strong>(modified)</strong>和之前提交状态有什么不同<strong>(Unmodified)</strong></p>
+<p>4、<code>git diff --cached</code> 比较<strong>Staged</strong>的状态和上一个<strong>Commit</strong>的状态的不同</p>
+<p>5、<code>git diff HEAD</code>再次修改Stage状态文件比较<strong>stage&amp;unstage</strong>有什么不同</p>
+<h3 id="2、比较三种不同形式的diff"><a href="#2、比较三种不同形式的diff" class="headerlink" title="2、比较三种不同形式的diff"></a>2、比较三种不同形式的diff</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 对比三种不同 diff 形式</span><br><span class="hljs-meta">$</span><span class="bash"> git diff HEAD     <span class="hljs-comment"># staged &amp; unstaged</span></span><br><br>@@ -1 +1,3 @@<br>-a = 1  # 已 staged<br>+a = 2  # 已 staged<br>+b = 1  # 已 staged<br>+c = b  # 还没 add 去 stage (unstaged)<br>-----------------------<br><span class="hljs-meta">$</span><span class="bash"> git diff          <span class="hljs-comment"># unstaged</span></span><br><br>@@ -1,2 +1,3 @@<br> a = 2  # 注: 前面没有 +<br> b = 1  # 注: 前面没有 +<br>+c = b  # 还没 add 去 stage (unstaged)<br>-----------------------<br><span class="hljs-meta">$</span><span class="bash"> git diff --cached <span class="hljs-comment"># staged</span></span><br><br>@@ -1 +1,2 @@<br>-a = 1  # 已 staged<br>+a = 2  # 已 staged<br>+b = 1  # 已 staged<br></code></pre></td></tr></table></figure>
+<h2 id="回到从前-reset"><a href="#回到从前-reset" class="headerlink" title="回到从前(reset)"></a>回到从前(reset)</h2><h3 id="1、修改已commit的版本"><a href="#1、修改已commit的版本" class="headerlink" title="1、修改已commit的版本"></a>1、修改已commit的版本</h3><p>​        有时候我们把文件<code>commit</code>到版本库之中，却发现还忘了附上另一个文件，例如我们最后一个<code>commit</code>是<code>change 2</code>，版本号<code>904e1ba</code>，那么我们的把附件也<code>commit</code>进<code>change 2</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git add 2.py</span><br><span class="hljs-meta">$</span><span class="bash"> git commit --amend --no-edit   <span class="hljs-comment"># &quot;--no-edit&quot;: 不编辑, 直接合并到上一个 commit</span></span><br><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --oneline    <span class="hljs-comment"># &quot;--oneline&quot;: 每个 commit 内容显示在一行</span></span><br></code></pre></td></tr></table></figure>
+<h3 id="2、从Stage返回-reset-到add之前"><a href="#2、从Stage返回-reset-到add之前" class="headerlink" title="2、从Stage返回(reset)到add之前"></a>2、从Stage返回(reset)到add之前</h3><p>​        有时我们已经把文件<code>add</code>到<code>stage</code>之中，但是想补充一些新得内容，这时，我们得回到<code>add</code>之前。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git add 1.py</span><br><span class="hljs-meta">$</span><span class="bash"> git status -s <span class="hljs-comment"># &quot;-s&quot;: status 的缩写模式</span></span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>M  1.py     # staged<br>-----------------------<br><span class="hljs-meta">$</span><span class="bash"> git reset 1.py</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>Unstaged changes after reset:<br>M	1.py<br>-----------------------<br><span class="hljs-meta">$</span><span class="bash"> git status -s</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br> M 1.py     # unstaged<br></code></pre></td></tr></table></figure>
+<h3 id="3、reset回到comimit之前（时光穿梭）"><a href="#3、reset回到comimit之前（时光穿梭）" class="headerlink" title="3、reset回到comimit之前（时光穿梭）"></a>3、reset回到comimit之前（时光穿梭）</h3><p>​        每个 <code>commit</code> 都有自己的 <code>id</code> 数字号, <code>HEAD</code> 是一个指针, 指引当前的状态是在哪个 <code>commit</code>. 最近的一次 <code>commit</code> 在最右边, 我们如果要回到过去, 就是让 <code>HEAD</code> 回到过去并 <code>reset</code> 此时的 <code>HEAD</code> 到过去的位置.</p>
+<p><img src="./-1.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="./-2.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="./-3.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="./-4.png" srcset="/img/loading.gif" alt=""></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 不管我们之前有没有做了一些 add 工作, 这一步让我们回到 上一次的 commit</span><br><span class="hljs-meta">$</span><span class="bash"> git reset --hard HEAD</span>    <br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>HEAD is now at 904e1ba change 2<br>-----------------------<br><span class="hljs-meta">#</span><span class="bash"> 看看所有的<span class="hljs-built_in">log</span></span><br><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --oneline</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>904e1ba change 2<br>c6762a1 change 1<br>13be9a7 create 1.py<br>-----------------------<br><span class="hljs-meta">#</span><span class="bash"> 回到 c6762a1 change 1</span><br><span class="hljs-meta">#</span><span class="bash"> 方式1: <span class="hljs-string">&quot;HEAD^&quot;</span> 几个箭头就是返回几个版本</span><br><span class="hljs-meta">$</span><span class="bash"> git reset --hard HEAD^</span>   <br><br><span class="hljs-meta">#</span><span class="bash"> 方式2: <span class="hljs-string">&quot;commit id&quot;</span></span><br><span class="hljs-meta">$</span><span class="bash"> git reset --hard c6762a1</span><br><br><span class="hljs-meta">#</span><span class="bash"> 方式3: <span class="hljs-string">&quot;HEAD~&quot;</span> ~后面加数字,数字几就是几个版本</span><br><span class="hljs-meta">$</span><span class="bash"> git reset --hard ~1</span><br>-----------------------<br><span class="hljs-meta">#</span><span class="bash"> 看看现在的 <span class="hljs-built_in">log</span></span><br><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --oneline</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>c6762a1 change 1<br>13be9a7 create 1.py<br></code></pre></td></tr></table></figure>
+<p>​        把版本库指到<code>c6762a1</code>后再用<code>log --oneline</code>查看发现之前得<code>change 2</code>没了,这是我么则需要用<code>git reflog</code>查看近期对HEAD得所有改动。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git reflog</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>c6762a1 HEAD@&#123;0&#125;: reset: moving to c6762a1<br>904e1ba HEAD@&#123;1&#125;: commit (amend): change 2<br>0107760 HEAD@&#123;2&#125;: commit: change 2<br>c6762a1 HEAD@&#123;3&#125;: commit: change 1<br>13be9a7 HEAD@&#123;4&#125;: commit (initial): create 1.py<br>-----------------------<br><span class="hljs-meta">#</span><span class="bash"> 重复reset步骤就能回到change2</span><br><span class="hljs-meta">$</span><span class="bash"> git reset --hard 904e1ba</span><br><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --oneline</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>904e1ba change 2<br>c6762a1 change 1<br>13be9a7 create 1.py<br></code></pre></td></tr></table></figure>
+<h2 id="回到从前"><a href="#回到从前" class="headerlink" title="回到从前"></a>回到从前</h2><h3 id="1、改写文件checkout"><a href="#1、改写文件checkout" class="headerlink" title="1、改写文件checkout"></a>1、改写文件checkout</h3><p>​        之前的<code>reset</code>是针对整个版本库，但是有时只想修改某一个文件，这时我们就要使用checkout语句时单个文件回到过去。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --oneline</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>904e1ba change 2<br>c6762a1 change 1<br>13be9a7 create 1.py<br><br>---------------------<br><span class="hljs-meta">$</span><span class="bash"> git checkout c6762a1 -- 1.py</span><br><br><br>---------------------<br><span class="hljs-meta">$</span><span class="bash"> git add 1.py</span><br><span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;back to change 1 and add comment for 1.py&quot;</span></span><br><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --oneline</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>47f167e back to change 1 and add comment for 1.py<br>904e1ba change 2<br>c6762a1 change 1<br>13be9a7 create 1.py<br></code></pre></td></tr></table></figure>
+<h2 id="分支（branch）"><a href="#分支（branch）" class="headerlink" title="分支（branch）"></a>分支（branch）</h2><p>​        有时我们需要不同的版本库（如开发软件的稳定版本和测试版），git提供分支（branch）管理去满足我们的需求。</p>
+<p><img src=".\1.svg" srcset="/img/loading.gif" alt="1"></p>
+<h3 id="1、用到的命令"><a href="#1、用到的命令" class="headerlink" title="1、用到的命令"></a>1、用到的命令</h3><p>1、<code>git log --oneline --graph</code> 用<code>--graph</code>查看分支.</p>
+<p>2、<code>git branch dev</code> 创建分支<code>dev</code>.</p>
+<p>3、<code>git checkout dev</code> 切换到分支dev.</p>
+<p>4、<code>git checkout -b  dev</code>创建并切换到分支dev.</p>
+<p>5、<code>git merge dev</code> 把分支推送到master，这个操作要在master上完成.</p>
+<p>6、<code>git commit -am &quot;change 3 in dev&quot;</code>  简化操作先add再commit，不过要在um状态下.</p>
+<h3 id="2、操作代码"><a href="#2、操作代码" class="headerlink" title="2、操作代码"></a>2、操作代码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git checkout -b  dev               <span class="hljs-comment">#创建和切换到新建的分支</span></span><br><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>Switched to a new branch &#x27;dev&#x27;<br><br>--------------------------<br><span class="hljs-meta">$</span><span class="bash"> git branch</span><br><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>* dev                                 # 这时 HEAD 已经被切换至 dev 分支<br>  master<br>  <br>--------------------------            # 修改dev中文件并提交 <br><span class="hljs-meta">$</span><span class="bash"> git commit -am <span class="hljs-string">&quot;change 3 in dev&quot;</span>    <span class="hljs-comment"># &quot;-am&quot;: add 所有改变 并直接 commit</span></span><br><br>--------------------------  <br><span class="hljs-meta">$</span><span class="bash"> git checkout master                 <span class="hljs-comment"># 切换至 master 才能把其他分支合并过来</span></span><br><span class="hljs-meta">$</span><span class="bash"> git merge --no-ff -m <span class="hljs-string">&quot;keep merge info&quot;</span> dev     <span class="hljs-comment"># 保留 merge 信息</span></span><br><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --oneline --graph</span><br><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>*   c60668f keep merge info<br>|\  <br>| * f9584f8 change 3 in dev                   # 这里就能看出, 我们建立过一个分支<br>|/  <br>* 47f167e back to change 1 and add comment for 1.py<br>* 904e1ba change 2<br>* c6762a1 change 1<br>* 13be9a7 create 1.py<br></code></pre></td></tr></table></figure>
+<p>​        <strong>注意：如果直接 <code>git merge dev</code>, git 会采用默认的 <code>Fast forward</code> 格式进行 <code>merge</code>, 这样 <code>merge</code> 的这次操作不会有 <code>commit</code> 信息. <code>log</code> 中也不会有分支的图案. 我们可以采取 <code>--no-ff</code> 这种方式保留 <code>merge</code> 的 <code>commit</code> 信息.</strong></p>
+<h2 id="merge分支冲突"><a href="#merge分支冲突" class="headerlink" title="merge分支冲突"></a>merge分支冲突</h2><p>​        如果我们在dev中做出修改，但是master这时被修改了,我们要进行合并，该怎么办呢？这是git会报出Automatic merge failed; fix conflicts and then commit the result.的错误，我们需打开文件手动调试保存那些内容。</p>
+<p><img src="./2.png" srcset="/img/loading.gif" alt=""></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 这是 master 的 <span class="hljs-built_in">log</span></span><br>* 3d7796e change 4 in master # 这一条 commit 和 dev 的不一样<br>* 47f167e back to change 1 and add comment for 1.py<br>* 904e1ba change 2<br>* c6762a1 change 1<br>* 13be9a7 create 1.py<br>-----------------------------<br><span class="hljs-meta">#</span><span class="bash"> 这是 dev 的 <span class="hljs-built_in">log</span></span><br>* f7d2e3a change 3 in dev   # 这一条 commit 和 master 的不一样<br>* 47f167e back to change 1 and add comment for 1.py<br>* 904e1ba change 2<br>* c6762a1 change 1<br>* 13be9a7 create 1.py<br><br><br>-------------------------<br><span class="hljs-meta">$</span><span class="bash"> git branch</span><br>  dev<br>* master<br>-------------------------<br><span class="hljs-meta">$</span><span class="bash"> git merge dev</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>Auto-merging 1.py<br>CONFLICT (content): Merge conflict in 1.py<br>Automatic merge failed; fix conflicts and then commit the result.<br><br><span class="hljs-meta">#</span><span class="bash"> 打开vscode，git已经帮我们把冲突标记出来了</span><br>a = 1<br><span class="hljs-meta">#</span><span class="bash"> I went back to change 1</span><br>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br><span class="hljs-meta">#</span><span class="bash"> edited <span class="hljs-keyword">in</span> master</span><br>=======<br><span class="hljs-meta">#</span><span class="bash"> edited <span class="hljs-keyword">in</span> dev</span><br><span class="hljs-meta">&gt;</span><span class="bash">&gt;&gt;&gt;&gt;&gt;&gt; dev</span><br>-------------------------<br><span class="hljs-meta">#</span><span class="bash"> 手动调试并提交</span><br>a = 1<br><span class="hljs-meta">#</span><span class="bash"> I went back to change 1</span><br><span class="hljs-meta">#</span><span class="bash"> edited <span class="hljs-keyword">in</span> master and dev</span><br><span class="hljs-meta">$</span><span class="bash"> git commit -am <span class="hljs-string">&quot;solve conflict&quot;</span></span><br>-------------------------<br><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --oneline --graph</span><br><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>*   7810065 solve conflict<br>|\  <br>| * f7d2e3a change 3 in dev<br>* | 3d7796e change 4 in master<br>|/  <br>* 47f167e back to change 1 and add comment for 1.py<br>* 904e1ba change 2<br>* c6762a1 change 1<br>* 13be9a7 create 1.py<br><br></code></pre></td></tr></table></figure>
+<h2 id="rebase分支冲突"><a href="#rebase分支冲突" class="headerlink" title="rebase分支冲突"></a>rebase分支冲突</h2><p>​        更高级的合并方式<code>rebase</code>，共享的 branch 是 <code>branch B</code>, 而我在 <code>branch A</code> 上工作, 有一天我发现<code>branch B</code>已经有一些小更新, 我也想试试我的程序和这些小更新兼不兼容, 我也我想合并, 这时就可以用 <code>rebase</code> 来补充我的分支<code>branch A</code>的内容. 补充完以后, 和后面那张图的 <code>merge</code> 不同, 我还是继续在 <code>C3</code> 上工作, 不过此时的 <code>C3</code> 的本质却不一样了, 因为吸收了那些小更新. 所以我们用 <code>C3&#39;</code> 来代替.</p>
+<p><img src="./3.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="./4.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="./5.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="./6.png" srcset="/img/loading.gif" alt=""></p>
+<p>​        可以看出我们工作的<code>C3</code>已经不是从<code>C1</code>衍生来的，这一点和<code>merge</code>不一样，<code>merge</code>是把C3和<code>C4</code>合并成一个新的<code>C5</code>,如果是rebase，那你就把别人的共享内容给改写了。</p>
+<p><img src="./7.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="1、错误示例把主分支基于你的分支修改"><a href="#1、错误示例把主分支基于你的分支修改" class="headerlink" title="1、错误示例把主分支基于你的分支修改"></a>1、错误示例把主分支基于你的分支修改</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 这是 master 的 <span class="hljs-built_in">log</span></span><br>* 3d7796e change 4 in master # 这一条 commit 和 dev 的不一样<br>* 47f167e back to change 1 and add comment for 1.py<br>* 904e1ba change 2<br>* c6762a1 change 1<br>* 13be9a7 create 1.py<br>-----------------------------<br><br><span class="hljs-meta">#</span><span class="bash"> 这是 dev 的 <span class="hljs-built_in">log</span></span><br>* f7d2e3a change 3 in dev   # 这一条 commit 和 master 的不一样<br>* 47f167e back to change 1 and add comment for 1.py<br>* 904e1ba change 2<br>* c6762a1 change 1<br>* 13be9a7 create 1.py<br><br>-----------------------------<br><span class="hljs-meta">$</span><span class="bash"> git branch</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>  dev<br>* master<br>-------------------------<br><br><span class="hljs-meta">$</span><span class="bash"> git rebase dev</span> <br><span class="hljs-meta">#</span><span class="bash"> 输出  显示有conflict要手动修改</span><br>First, rewinding head to replay your work on top of it...<br>Applying: change 3 in dev<br>Using index info to reconstruct a base tree...<br>M	1.py<br>Falling back to patching base and 3-way merge...<br>Auto-merging 1.py<br>CONFLICT (content): Merge conflict in 1.py<br>error: Failed to merge in the changes.<br>Patch failed at 0001 change 3 in dev<br>The copy of the patch that failed is found in: .git/rebase-apply/patch<br><br>When you have resolved this problem, run &quot;git rebase --continue&quot;.<br>If you prefer to skip this patch, run &quot;git rebase --skip&quot; instead.<br>To check out the original branch and stop rebasing, run &quot;git rebase --abort&quot;.<br>-------------------------<br><br><span class="hljs-meta">$</span><span class="bash"> git add 1.py</span><br><span class="hljs-meta">$</span><span class="bash"> git rebase --<span class="hljs-built_in">continue</span></span><br>-------------------------<br><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --oneline --graph</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>* c844cb1 change 4 in master    # 这条 commit 原本的id=3d7796e, 所以 master 的历史被修改<br>* f7d2e3a change 3 in dev       # rebase 过来的 dev commit<br>* 47f167e back to change 1 and add comment for 1.py<br>* 904e1ba change 2<br>* c6762a1 change 1<br>* 13be9a7 create 1.py<br></code></pre></td></tr></table></figure>
+<p><strong>!! 注意 !!</strong> 这个例子也说明了使用 <code>rebase</code> 要万分小心, 千万不要在共享的 branch 中 <code>rebase</code>, 不然就像上面那样, 现在 <code>master</code> 的历史已经被 <code>rebase</code> 改变了. <code>master</code> 当中别人提交的 <code>change 4</code> 就被你无情地修改掉了, 所以千万不要在共享分支中使用 <code>rebase</code>.</p>
+<h2 id="临时修改（stash）"><a href="#临时修改（stash）" class="headerlink" title="临时修改（stash）"></a>临时修改（stash）</h2><p>​        想想有天在开开心心地改进代码, 突然接到老板的一个电话说要改之前的一个程序. 怎么办? 虽然还需要很久时间才能改进完自己的代码, 可我有强迫症, 又不想把要改的程序和自己改进代码的部分一起 <code>commit</code> 了.</p>
+<p>这时 <code>stash</code> 就是我的救星了. 用 <code>stash</code> 能先将我的那改进的部分放在一边分隔开来. 再另外单独处理老板的任务.</p>
+<h3 id="1、临时修改代码"><a href="#1、临时修改代码" class="headerlink" title="1、临时修改代码"></a>1、临时修改代码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git checkout dev</span><br></code></pre></td></tr></table></figure>
+<p>在 <code>dev</code> 中的 <code>1.py</code> 中加上一行 <code># feel happy</code>, 然后老板的电话来了, 可是我还没有改进完这些代码. 所以我就用 <code>stash</code> 将这些改变暂时放一边.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git status -s</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br> M 1.py<br>------------------ <br><span class="hljs-meta">$</span><span class="bash"> git stash</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>Saved working directory and index state WIP on dev: f7d2e3a change 3 in dev<br>HEAD is now at f7d2e3a change 3 in dev<br>-------------------<br><span class="hljs-meta">$</span><span class="bash"> git status</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>On branch dev<br>nothing to commit, working directory clean     # 干净得很<br></code></pre></td></tr></table></figure>
+<p>​        然后去从<code>master</code>中建立新分支去完成老板的任务，<code>merge</code>合并到<code>master</code>后我们在转会dev.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git checkout dev</span><br><span class="hljs-meta">$</span><span class="bash"> git stash list    <span class="hljs-comment"># 查看在 stash 中的缓存</span></span><br><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>stash@&#123;0&#125;: WIP on dev: f7d2e3a change 3 in dev<br><span class="hljs-meta">$</span><span class="bash"> git stash pop</span><br><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br>On branch dev<br>Changes not staged for commit:<br>  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)<br>  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)<br><br>	modified:   1.py<br><br>no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)<br>Dropped refs/stash@&#123;0&#125; (23332b7edc105a579b09b127336240a45756a91c)<br>----------------------<br><span class="hljs-meta">$</span><span class="bash"> git status -s</span><br><span class="hljs-meta">#</span><span class="bash"> 输出</span><br> M 1.py     # 和最开始一样了<br></code></pre></td></tr></table></figure>
+<h2 id="github在线管理"><a href="#github在线管理" class="headerlink" title="github在线管理"></a>github在线管理</h2><h3 id="1、建立版本库"><a href="#1、建立版本库" class="headerlink" title="1、建立版本库"></a>1、建立版本库</h3><h3 id="2、链接本地版本库"><a href="#2、链接本地版本库" class="headerlink" title="2、链接本地版本库"></a>2、链接本地版本库</h3><h3 id="3、本地推送修改"><a href="#3、本地推送修改" class="headerlink" title="3、本地推送修改"></a>3、本地推送修改</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git remote add origin https://github.com/MorvanZhou/git-demo.git</span><br><span class="hljs-meta">#</span><span class="bash"> 上面https是莫烦的，链接时记得换成自己的</span><br><span class="hljs-meta">$</span><span class="bash"> git push -u origin master     <span class="hljs-comment"># 推送本地 master 去 origin</span></span><br><span class="hljs-meta">$</span><span class="bash"> git push -u origin dev        <span class="hljs-comment"># 推送本地 dev  去 origin</span></span><br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/tool/">tool</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/git-how-use/">-git -how use</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'https://github.com/qingcai56/qingcai56.github.io.git https://gitee.com/qingcai56/qingcai56.git');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
