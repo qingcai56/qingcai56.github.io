@@ -232,7 +232,7 @@
 <li>在线网站：<a target="_blank" rel="noopener" href="https://refactoring.guru/">https://refactoring.guru/</a> </li>
 <li>课本：<strong>可复用面向对象</strong>软件的基础</li>
 </ol>
-<p><img src="./book.png" srcset="/img/loading.gif" alt="image-20210122103057949"></p>
+<p><img src="./book.png" srcset="/img/loading.gif" alt="设计模式"></p>
 <h2 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h2><p>“每一个模式描述了一个在我们周围<strong>不断重复发生的问题</strong>， 以及该问题的<strong>解决方案的核心</strong>。这样，你就能<strong>一次又一次地使用该方案而不必做重复劳动</strong>”。                              ————Christopher Alexander</p>
 <h2 id="课程目标"><a href="#课程目标" class="headerlink" title="课程目标"></a>课程目标</h2><ul>
 <li>理解松耦合设计思想</li>
@@ -365,29 +365,28 @@
               <article class="comments" id="comments">
                 
                 
+  <div id="gitalk-container"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
-      var light = 'github-light';
-      var dark = 'github-dark';
-      var schema = document.documentElement.getAttribute('data-user-color-scheme');
-      if (schema === 'dark') {
-        schema = dark;
-      } else {
-        schema = light;
-      }
-      window.UtterancesThemeLight = light;
-      window.UtterancesThemeDark = dark;
-      var s = document.createElement('script');
-      s.setAttribute('src', 'https://utteranc.es/client.js');
-      s.setAttribute('repo', 'https://github.com/qingcai56/qingcai56.github.io.git https://gitee.com/qingcai56/qingcai56.git');
-      s.setAttribute('issue-term', 'pathname');
-      
-      s.setAttribute('label', 'utterances');
-      
-      s.setAttribute('theme', schema);
-      s.setAttribute('crossorigin', 'anonymous');
-      document.getElementById('comments').appendChild(s);
-    })
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '4c1cc64f58db04df20d1',
+          clientSecret: '2294f62510394895083f100399f1a90e6421dfbd',
+          repo: 'gitalk-comment',
+          owner: 'qingcai56',
+          admin: ["qingcai56"],
+          id: '7cabd511b6a2d11ffd66f6c4fc2d57f8',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
   </script>
   <noscript>Please enable JavaScript to view the comments</noscript>
 
