@@ -1,0 +1,596 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shuye.png">
+  <link rel="icon" type="image/png" href="/img/shuye.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="qingcai56">
+  <meta name="keywords" content="">
+  <title>回文与进制转化 - qingcai56&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>八百物屋</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/astronaut.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="回文与进制转化">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-23 10:17" pubdate>
+        January 23, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">回文与进制转化</h1>
+            
+            <div class="markdown-body">
+              <p> 本文主要是对蓝桥杯练习系统题库的BASIC-7，8，9（两个回文题目）。BASIC-10,11,12(三个进制转化)的题目总结和拓展,虽然题目不难但是还是有许多可以总结和学习的东西的。</p>
+<h1 id="回文数"><a href="#回文数" class="headerlink" title="回文数"></a>回文数</h1><p>先来看这一个题目，</p>
+<h2 id="9-回文数"><a href="#9-回文数" class="headerlink" title="9. 回文数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-number/">9. 回文数</a></h2><p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<p><strong>示例1：</strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">输入: 121</span><br><span class="hljs-section">输出: true</span><br></code></pre></td></tr></table></figure>
+<p><strong>示例2：</strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">输入: -121</span><br><span class="hljs-section">输出: false</span><br><span class="hljs-section">解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</span><br></code></pre></td></tr></table></figure>
+<p>回文数一般都很好想，负数就肯定不是回文了，直接false，然后我的两种思路。</p>
+<ol>
+<li><strong>整数转化为字符串</strong>，用循环判断，比较第一个和最后一个，第二个和倒数第二个…</li>
+<li>将这个<strong>整数进行翻转</strong>，然后再和原整数对比。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//思路一实现: 用string库中的to_string()函数(因为浮点数本身表示原因，这个函数对浮点数转化一般不会得到想要的结果)</span><br>	<span class="hljs-built_in">string</span> s= to_string(number);<br>	<span class="hljs-keyword">int</span> lens=s.length();<br>	<span class="hljs-keyword">for</span>();<br><span class="hljs-comment">//思路二实现:</span><br>	<span class="hljs-comment">//剔除不能翻转的整数</span><br>	<span class="hljs-keyword">if</span>(x % <span class="hljs-number">10</span> == <span class="hljs-number">0</span> &amp;&amp; x != <span class="hljs-number">0</span>)&#123;<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;&#125;<br>	<span class="hljs-comment">//翻转</span><br>	<span class="hljs-keyword">int</span> reverteNumber = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> tmp = number;<br>    <span class="hljs-keyword">while</span> (tmp != <span class="hljs-number">0</span>) &#123;<br>        reverteNumber = reverteNumber * <span class="hljs-number">10</span> + tmp % <span class="hljs-number">10</span>;<br>        tmp /= <span class="hljs-number">10</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (reverteNumber == number) &#123; <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; &#125;<br>    <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; &#125;<br></code></pre></td></tr></table></figure>
+<p>然后再来看一下两道蓝桥的题目</p>
+<h2 id="BASIC-8-回文数"><a href="#BASIC-8-回文数" class="headerlink" title="BASIC-8 回文数"></a>BASIC-8 <a target="_blank" rel="noopener" href="http://lx.lanqiao.cn/problem.page?gpid=T47">回文数</a></h2><p><strong>问题描述：</strong></p>
+<p>　1221是一个非常特殊的数，它从左边读和从右边读是一样的，编程求所有这样的四位十进制数。</p>
+<p><strong>输出格式：</strong></p>
+<p>​    按从小到大的顺序输出满足条件的四位十进制数。</p>
+<blockquote>
+<p>一模一样的题目题目对不对，直接写个循环从1000开始判断，按上面的两种思路看这个数是不是回文，是回文则输出，不是则continue下一个直到9999为止，然后我框框框，啪啪啪写下来了，40+行，然后我看到别人(柳诺)的题解👇。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">9</span>; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt;= <span class="hljs-number">9</span>; j++) &#123;<br>            <span class="hljs-built_in">cout</span> &lt;&lt; i &lt;&lt; j &lt;&lt; j &lt;&lt; i &lt;&lt; <span class="hljs-built_in">endl</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>题目只是让你输出数字，没让你判断是不是回文数，抓住本质问题，做的工作果然还是要少一些😥</p>
+<h2 id="BASIC-7-amp-9-特殊的数字-amp-特殊回文数"><a href="#BASIC-7-amp-9-特殊的数字-amp-特殊回文数" class="headerlink" title="BASIC-7&amp;9  特殊的数字 &amp;特殊回文数"></a>BASIC-7&amp;9 <a target="_blank" rel="noopener" href="http://lx.lanqiao.cn/problem.page?gpid=T46"> 特殊的数字</a> &amp;<a target="_blank" rel="noopener" href="http://lx.lanqiao.cn/problem.page?gpid=T48">特殊回文数</a></h2><h3 id="特殊数字："><a href="#特殊数字：" class="headerlink" title="特殊数字："></a>特殊数字：</h3><p><strong>问题描述：</strong></p>
+<p>153是一个非常特殊的数，它等于它的每位数字的立方和，即153=1×1×1+5×5×5+3×3×3。编程求所有满足这种条件的三位十进制数。</p>
+<blockquote>
+<p>我之前这个题也是把个位，十位，百位全部取出来，再判断，但是按照第八题的思路，完全不用这样干，三重循环（i,j,k分别代表个位、十位、百位）,再写判断1×1×1+5×5×5+3×3×3  ？=153，如果等于cout&lt;&lt;i&lt;&lt;j&lt;&lt;k 即可。</p>
+</blockquote>
+<h3 id="特殊回文数"><a href="#特殊回文数" class="headerlink" title="特殊回文数"></a>特殊回文数</h3><p><strong>问题描述：</strong></p>
+<p>123321是一个非常特殊的数，它从左边读和从右边读是一样的。输入一个正整数n， 编程求所有这样的五位和六位十进制数，满足各位数字之和等于n 。</p>
+<blockquote>
+<p>也是上面第八题的思路，不过五位和六位分别写两个循环。</p>
+</blockquote>
+<hr>
+<h1 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h1><h2 id="BASIC-10-十进制转十六进制"><a href="#BASIC-10-十进制转十六进制" class="headerlink" title="BASIC-10 十进制转十六进制"></a>BASIC-10 <a target="_blank" rel="noopener" href="http://lx.lanqiao.cn/problem.page?gpid=T49">十进制转十六进制</a></h2><p><strong>问题描述：</strong></p>
+<p>​    十六进制数是在程序设计时经常要使用到的一种整数的表示方式。它有0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F共16个符号，分别表示十进制数的0至15。十六进制的计数方法是满16进1，所以十进制数16在十六进制中是10，而十进制的17在十六进制中是11，以此类推，十进制的30在十六进制中是1E。<br>　　给出一个非负整数，将它表示成十六进制的形式。</p>
+<ul>
+<li>输入格式：输入包含一个非负整数a，表示要转换的数。0&lt;=a&lt;=2147483647。  如：30</li>
+<li>输出格式：输出这个整数的16进制表示。如: 1E</li>
+</ul>
+<p>第一眼看到这个题的时候我都没得犹豫，直接输出流中调整<code>cout&lt;&lt;hex&lt;&lt;number;</code>，当然这也是一种耍赖的做法，默认<code>cout&lt;&lt;hex&lt;&lt;number;</code>输出的是1e，题目要求那个字母大写，引入<code>iomanip</code>中的<code>setiosflags(ios::uppercase)</code>调整即可。记住hex，dec，oct，bin和这个库（前提是oj系统中带这个库），就可以快速处理<strong>非大数问题</strong>的进制转化问题了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iomanip&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> n;<br>	<span class="hljs-built_in">cin</span> &gt;&gt; n;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; setiosflags(ios::uppercase)&lt;&lt; hex &lt;&lt; n;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="BASIC-11-十六进制转十进制"><a href="#BASIC-11-十六进制转十进制" class="headerlink" title="BASIC-11 十六进制转十进制"></a>BASIC-11 <a target="_blank" rel="noopener" href="http://lx.lanqiao.cn/problem.page?gpid=T50">十六进制转十进制</a></h2><p><strong>问题描述</strong>：</p>
+<p>从键盘输入一个<strong>不超过8位的正的十六进制数</strong>字符串，将它转换为正的十进制数后输出。<br>注：十六进制数中的10~15分别用大写的英文字母A、B、C、D、E、F表示。</p>
+<ul>
+<li>样例输入: FFFF</li>
+<li>样例输出: 65535</li>
+</ul>
+<blockquote>
+<p>虽然也可以用cin &gt;&gt; hex &gt;&gt; number;  cout &lt;&lt; number; 这样的语句偷懒，但是还是用常规方法做一下</p>
+</blockquote>
+<p>这里<strong>不超过8位的十六进制数字符串</strong>，每个16进制4位嘛，4*8=32，题目输入的都是无符号（正）数。<code>int</code>是32位（带一位符号位，所以只有31位可表示），所有要把转化后的size定义为<code>long long</code>（64位），或者<code>unsigned int</code>也行。然后这边还要注意的一点就是ASCII码加减运算出数字的操作。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-built_in">string</span> number;<br>	<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> size=<span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">cin</span> &gt;&gt; number;<br>	<span class="hljs-keyword">int</span> len = number.size();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++)<br>	&#123;<br>		<span class="hljs-keyword">if</span> (number[i] &gt;= <span class="hljs-string">&#x27;A&#x27;</span>)<br>		&#123;<br>			size = size*<span class="hljs-number">16</span> + (number[i] - <span class="hljs-string">&#x27;A&#x27;</span> + <span class="hljs-number">10</span>);<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			size = size*<span class="hljs-number">16</span> + (number[i] - <span class="hljs-string">&#x27;0&#x27;</span>);<br>		&#125;<br>	&#125;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; size;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;	<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="BASIC-12-十六进制转八进制"><a href="#BASIC-12-十六进制转八进制" class="headerlink" title="BASIC-12 十六进制转八进制"></a>BASIC-12 <a target="_blank" rel="noopener" href="http://lx.lanqiao.cn/problem.page?gpid=T51">十六进制转八进制</a></h2><p><strong>问题描述</strong></p>
+<p>　给定n个十六进制正整数，输出它们对应的八进制数。</p>
+<p><strong>输入格式</strong><br>　　输入的第一行为一个正整数n （1&lt;=n&lt;=10）。<br>　　接下来n行，每行一个由0~9、大写字母A~F组成的字符串，表示要转换的十六进制正整数，每个<strong>十六进制数长度不超过100000</strong>。</p>
+<p><strong>输出格式</strong><br>　　输出n行，每行为输入对应的八进制正整数。</p>
+<p>　　<strong>【注意</strong>】<br>　　输入的十六进制数不会有前导0，比如012A。<br>　　输出的八进制数也不能有前导0。</p>
+<ul>
+<li><p><strong>样例输入</strong>   </p>
+<p>​        2<br>　　39<br>　　123ABC</p>
+</li>
+</ul>
+<p><strong>样例输出</strong></p>
+<p>​        71<br>　　4435274</p>
+<blockquote>
+<p>tip：先将十六进制数转换成某进制数，再由某进制数转换成八进制。</p>
+</blockquote>
+<p>我先想的是，16进制转10进制呗，十进制再转8进制。写就完了，然后就有了👇面代码。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 10</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> <span class="hljs-title">hex_to_dec</span><span class="hljs-params">(<span class="hljs-built_in">string</span> str)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> len = str.size();<br>	<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> sum = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++)<br>	&#123;<br>		<span class="hljs-keyword">if</span> (str[i]&gt;=<span class="hljs-string">&#x27;A&#x27;</span>)<br>		&#123;<br>			sum = sum * <span class="hljs-number">16</span> + (str[i] - <span class="hljs-string">&#x27;A&#x27;</span> + <span class="hljs-number">10</span>);<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			sum = sum * <span class="hljs-number">16</span> + (str[i] - <span class="hljs-string">&#x27;0&#x27;</span>);<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> sum;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dec_to_oct</span><span class="hljs-params">(<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> oct)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> a[<span class="hljs-number">10000</span>];<br>	<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (oct!=<span class="hljs-number">0</span>)<br>	&#123;<br>		a[i++]= oct % <span class="hljs-number">8</span>;<br>		oct /= <span class="hljs-number">8</span>;<br>	&#125;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i<span class="hljs-number">-1</span>; j &gt;= <span class="hljs-number">0</span>; j--)<br>	&#123;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; a[j];<br>	&#125;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> n;<br>	<span class="hljs-built_in">string</span> a[N];<br>	<span class="hljs-built_in">cin</span> &gt;&gt; n;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>	&#123;<br>		<span class="hljs-built_in">cin</span> &gt;&gt; a[i];<br>	&#125;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>	&#123;<br>		<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> oct = hex_to_dec(a[i]);<br>		dec_to_oct(oct);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;	<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后就是无情的未通过，检查了好处时间发现题目这么一句话<strong>十六进制数长度不超过100000</strong>，大数问题了，long long都不顶用。改呗没办法😶</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">string</span> b, s, a;<br>    <span class="hljs-keyword">int</span> n;<br>    <span class="hljs-built_in">cin</span> &gt;&gt; n;<br>    <span class="hljs-comment">//用2进制做转化</span><br>    <span class="hljs-built_in">string</span> arr[<span class="hljs-number">16</span>] = &#123; <span class="hljs-string">&quot;0000&quot;</span>, <span class="hljs-string">&quot;0001&quot;</span>, <span class="hljs-string">&quot;0010&quot;</span>, <span class="hljs-string">&quot;0011&quot;</span>, <span class="hljs-string">&quot;0100&quot;</span>, <span class="hljs-string">&quot;0101&quot;</span>, <span class="hljs-string">&quot;0110&quot;</span>, <span class="hljs-string">&quot;0111&quot;</span>, <span class="hljs-string">&quot;1000&quot;</span>,<br>        <span class="hljs-string">&quot;1001&quot;</span>, <span class="hljs-string">&quot;1010&quot;</span>, <span class="hljs-string">&quot;1011&quot;</span>, <span class="hljs-string">&quot;1100&quot;</span>, <span class="hljs-string">&quot;1101&quot;</span>, <span class="hljs-string">&quot;1110&quot;</span>, <span class="hljs-string">&quot;1111&quot;</span> &#125;;<br>    <span class="hljs-built_in">map</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt;m;<br>    m[<span class="hljs-string">&quot;000&quot;</span>] = <span class="hljs-string">&quot;0&quot;</span>; m[<span class="hljs-string">&quot;001&quot;</span>] = <span class="hljs-string">&quot;1&quot;</span>; m[<span class="hljs-string">&quot;010&quot;</span>] = <span class="hljs-string">&quot;2&quot;</span>; m[<span class="hljs-string">&quot;011&quot;</span>] = <span class="hljs-string">&quot;3&quot;</span>; m[<span class="hljs-string">&quot;100&quot;</span>] = <span class="hljs-string">&quot;4&quot;</span>;<br>    m[<span class="hljs-string">&quot;101&quot;</span>] = <span class="hljs-string">&quot;5&quot;</span>; m[<span class="hljs-string">&quot;110&quot;</span>] = <span class="hljs-string">&quot;6&quot;</span>; m[<span class="hljs-string">&quot;111&quot;</span>] = <span class="hljs-string">&quot;7&quot;</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>    &#123;<br>        <span class="hljs-built_in">cin</span> &gt;&gt; s;<br>        <span class="hljs-keyword">int</span> lens = s.length();<br>        <span class="hljs-comment">// 变成2进制存储</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; lens; j++)<br>        &#123;<br>            <span class="hljs-keyword">if</span> (s[j]&gt;<span class="hljs-string">&#x27;9&#x27;</span>)<br>            &#123;<br>                b += arr[s[j] - <span class="hljs-string">&#x27;A&#x27;</span> + <span class="hljs-number">10</span>];<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>            &#123;<br>                b += arr[s[j] - <span class="hljs-string">&#x27;0&#x27;</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">int</span> lenb = b.length();<br>        <span class="hljs-comment">//lenb不是3的整数倍就在前面补0</span><br>        <span class="hljs-keyword">if</span> (lenb%<span class="hljs-number">3</span>==<span class="hljs-number">1</span>)<br>        &#123;<br>            b = <span class="hljs-string">&quot;00&quot;</span> + b;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (lenb%<span class="hljs-number">3</span>==<span class="hljs-number">2</span>)<br>        &#123;<br>            b = <span class="hljs-string">&quot;0&quot;</span> + b;<br>        &#125;<br>        <span class="hljs-comment">//这时b就变成合格的二进制数了</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; lenb; j+=<span class="hljs-number">3</span>)<br>        &#123;<br>            <span class="hljs-comment">//取子串，每三位取一次</span><br>            <span class="hljs-built_in">string</span> temp = b.substr(j, <span class="hljs-number">3</span>);<br>            <span class="hljs-built_in">string</span> t = m[temp];<br>            <span class="hljs-comment">//如果16进制第一位是0001，填上0,1,2个0，前三个数字组成的子串为000</span><br>            <span class="hljs-keyword">if</span> (j==<span class="hljs-number">0</span> &amp;&amp; t==<span class="hljs-string">&quot;0&quot;</span>)<br>            &#123;<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            <span class="hljs-built_in">cout</span> &lt;&lt; t;<br>        &#125;<br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>        b = <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>改的方法也是借鉴了<a target="_blank" rel="noopener" href="https://github.com/liuchuo/Lanqiao/blob/master/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/C%2B%2B/BASIC-12%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%85%AB%E8%BF%9B%E5%88%B6.cpp">柳诺的题解</a>但是她有一段代码我觉得没有必要，我删掉了也是过了oj的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++">	<span class="hljs-keyword">if</span> (j == <span class="hljs-number">0</span> &amp;&amp; t == <span class="hljs-string">&quot;0&quot;</span>) &#123;<br>             flag = <span class="hljs-number">1</span>;<br>             <span class="hljs-keyword">continue</span>;<br>         &#125;<br><span class="hljs-comment">//这里还做了第二次判断，如果第一个三位为0且第二个三位为0，则也忽略。</span><br>         <span class="hljs-keyword">if</span> (flag == <span class="hljs-number">1</span> &amp;&amp; j == <span class="hljs-number">3</span> &amp;&amp; t == <span class="hljs-string">&quot;0&quot;</span>) &#123;<br>             <span class="hljs-keyword">continue</span>;<br>         &#125;<br></code></pre></td></tr></table></figure>
+<p>但是题目是不会出现连续六个0的情况的，出现这种情况是0000为第一个十六进制数，再填上2个零，但是题目标注了</p>
+<ul>
+<li>输入的<strong>十六进制数不会有前导0</strong>，比如012A。</li>
+<li>输出的八进制数也不能有前导0。</li>
+</ul>
+<p>感觉自己数电和计算机组成原理白学了😥，纸上做题时，16进制展开，然后三个三个划一组变成8进制，到code时却没想到这个过程。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/lanqiao-%E5%88%B7%E9%A2%98/">-lanqiao -刷题</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%8E%9F%E5%88%99/">
+                        <span class="hidden-mobile">设计模式概述与原则</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '4c1cc64f58db04df20d1',
+          clientSecret: '60df911ad9c5263324a2797ea783b31c4f05eb92',
+          repo: 'gitalk-comment',
+          owner: 'qingcai56',
+          admin: ["qingcai56"],
+          id: '9cca33601a4a3fd2cf6139fb3f4ec858',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
