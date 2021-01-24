@@ -1,0 +1,632 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shuye.png">
+  <link rel="icon" type="image/png" href="/img/shuye.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="learning">
+  <meta name="author" content="qingcai56">
+  <meta name="keywords" content="">
+  <title>GoF_组件协作 - qingcai56&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>八百物屋</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/astronaut.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="GoF_组件协作">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-24 17:08" pubdate>
+        January 24, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">GoF_组件协作</h1>
+            
+            <div class="markdown-body">
+              <h1 id="“组件协作”模式"><a href="#“组件协作”模式" class="headerlink" title="“组件协作”模式"></a>“组件协作”模式</h1><p>​            现代软件专业分工之后的第一个结果是“<strong>框架与应用程序</strong>的划分”，“组件协作”模式通过晚期绑定，来实现框架与应用程序之间的松耦合是二者之间协作时常用的模式。</p>
+<p><strong>典型模式：</strong></p>
+<ul>
+<li>Template Method  </li>
+<li>Observer / Event </li>
+<li>Strategy</li>
+</ul>
+<h2 id="🌿Template-Method"><a href="#🌿Template-Method" class="headerlink" title="🌿Template Method"></a>🌿Template Method</h2><p>​            定义一<strong>个操作中的算法的骨架 (稳定)</strong>，而将一些<strong>步骤延迟 (变化)到子类</strong>中。Template Method使得子类可以<strong>不改变 (复用)一个算法的结构</strong>即可重定义<strong>(override 重写)</strong>该算法的 某些特定步骤。                                                                                      ——《设计模式》GoF</p>
+<h3 id="动机（Motivation）"><a href="#动机（Motivation）" class="headerlink" title="动机（Motivation）"></a>动机（Motivation）</h3><ul>
+<li>在软件构建过程中，对于某一项任务，它常常有稳定的整体操作结构，但各个子步骤却有很多改变的需求，或者由于固有的原因 （比如框架与应用之间的关系）而无法和任务的整体结构同时实现。</li>
+<li>如何在确定稳定操作结构的前提下，来灵活应对各个子步骤的变化或者晚期实现需求？</li>
+</ul>
+<h3 id="样例👇"><a href="#样例👇" class="headerlink" title="样例👇"></a>样例👇</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//例1</span><br><span class="hljs-comment">//程序库开发人员in template1_lib.cpp</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Library</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step1</span><span class="hljs-params">()</span></span>&#123;<br>		<span class="hljs-comment">//...</span><br>	&#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step3</span><span class="hljs-params">()</span></span>&#123;<br>		<span class="hljs-comment">//...</span><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step5</span><span class="hljs-params">()</span></span>&#123;<br>		<span class="hljs-comment">//...</span><br>    &#125;<br>&#125;;<br><br><span class="hljs-comment">//应用程序开发人员in template1_app.cpp</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Step2</span><span class="hljs-params">()</span></span>&#123;<br>		<span class="hljs-comment">//...</span><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step4</span><span class="hljs-params">()</span></span>&#123;<br>		<span class="hljs-comment">//...</span><br>    &#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-function">Library <span class="hljs-title">lib</span><span class="hljs-params">()</span></span>;<br>	<span class="hljs-function">Application <span class="hljs-title">app</span><span class="hljs-params">()</span></span>;<br><br>	lib.Step1();<br><br>	<span class="hljs-keyword">if</span> (app.Step2())&#123;<br>		lib.Step3();<br>	&#125;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++)&#123;<br>		app.Step4();<br>	&#125;<br><br>	lib.Step5();<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//程序库开发人员 in template2_lib.cpp</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Library</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-comment">//稳定 template method， ！！稳定中有变化</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Run</span><span class="hljs-params">()</span></span>&#123;<br>        <br>        Step1();<br><br>        <span class="hljs-keyword">if</span> (Step2()) &#123; <span class="hljs-comment">//支持变化 ==&gt; 虚函数的多态调用</span><br>            Step3(); <br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++)&#123;<br>            Step4(); <span class="hljs-comment">//支持变化 ==&gt; 虚函数的多态调用</span><br>        &#125;<br><br>        Step5();<br><br>    &#125;<br>    <span class="hljs-comment">//  !!基类要定义虚析构函数，不写可能子类的析构函数调不到</span><br>	<span class="hljs-keyword">virtual</span> ~Library()&#123; &#125;<br><br><span class="hljs-keyword">protected</span>:<br>	<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step1</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//稳定</span><br>        <span class="hljs-comment">//.....</span><br>    &#125;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step3</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-comment">//稳定</span><br>        <span class="hljs-comment">//.....</span><br>    &#125;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step5</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//稳定</span><br>		<span class="hljs-comment">//.....</span><br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Step2</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<span class="hljs-comment">//变化</span><br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Step4</span><span class="hljs-params">()</span> </span>=<span class="hljs-number">0</span>; <span class="hljs-comment">//变化</span><br>&#125;;<br><br><span class="hljs-comment">//应用程序开发人员 in template2_app.cpp</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span> :</span> <span class="hljs-keyword">public</span> Library &#123;<br><span class="hljs-keyword">protected</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Step2</span><span class="hljs-params">()</span></span>&#123;<br>		<span class="hljs-comment">//... 子类重写实现</span><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Step4</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-comment">//... 子类重写实现</span><br>    &#125;<br>&#125;;<br><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function">	</span>&#123;<br>	    Library* pLib=<span class="hljs-keyword">new</span> Application();<br>	    lib-&gt;Run();<br><br>		<span class="hljs-keyword">delete</span> pLib;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src=".\bind.png" srcset="/img/loading.gif" alt="两段代码区别"></p>
+<blockquote>
+<p>设计模式：在变化和稳定之间寻找<strong>隔离点</strong>，从而分离它们，管理变化（把兔子关进笼子里）。如果没有稳定，或者没有变化，设计模式也将不起作用。</p>
+</blockquote>
+<h3 id="结构（Structure）"><a href="#结构（Structure）" class="headerlink" title="结构（Structure）"></a>结构（Structure）</h3><p><img src=".\template.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="要点总结"><a href="#要点总结" class="headerlink" title="要点总结"></a>要点总结</h3><ul>
+<li>Template Method模式是一种非常基础性的设计模式，在面向对象系统中有着大量的应用。它用最简洁的机制（<strong>虚函数的多态性</strong>，<em>函数指针也可以实现</em>） 为很多应用程序框架提供了<strong>灵活的扩展点</strong>，是代码复用方面的基本实现结构。</li>
+<li>除了可以灵活应对子步骤的变化外，“不要调用我，让我来调用你”的<strong>反向控制结构</strong>是Template Method的典型应用。</li>
+<li>在具体实现方面，被Template Method调用的虚方法可以具有实现，也可以没有任何实现（<strong>抽象方法、纯虚方法</strong>），但一般推荐将它们设置为<strong>protected</strong>方法。</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://refactoring.guru/design-patterns/template-method"> 网站章节学习资料</a></p>
+</blockquote>
+<p><br></p>
+<hr>
+<p><br></p>
+<h2 id="🌿Strategy"><a href="#🌿Strategy" class="headerlink" title="🌿Strategy"></a>🌿Strategy</h2><p>​            定义一系列算法，把它们一个个封装起来，并且使它们可<strong>互相替换（变化）</strong>。该模式使得<strong>算法可独立于使用它的客户程序</strong>(稳定)而变（扩展，子类化）。                                                                                                                                                    ——《设计模式》GoF</p>
+<h3 id="动机（Motivation）-1"><a href="#动机（Motivation）-1" class="headerlink" title="动机（Motivation）"></a>动机（Motivation）</h3><ul>
+<li>在软件构建过程中，某些<strong>对象使用的算法可能多种多样</strong>，经常改变，如果将这些算法都编码到对象中，将会使对象变得异常复杂； 而且有时候支持不使用的算法也是一个<strong>性能</strong>负担(大量判断)。</li>
+<li>如何在运行时根据需要透明地更改对象的算法？将算法与对象本 身解耦，从而避免上述问题？</li>
+</ul>
+<h3 id="样例👇（税总计算）"><a href="#样例👇（税总计算）" class="headerlink" title="样例👇（税总计算）"></a>样例👇（税总计算）</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//method 1</span><br><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">TaxBase</span> &#123;</span><br>	CN_Tax,<br>	US_Tax,<br>	DE_Tax,<br>	FR_Tax       <span class="hljs-comment">//更改</span><br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SalesOrder</span>&#123;</span><br>    TaxBase tax;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">CalculateTax</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-comment">//...</span><br>        <br>        <span class="hljs-keyword">if</span> (tax == CN_Tax)&#123;<br>            <span class="hljs-comment">//CN***********</span><br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (tax == US_Tax)&#123;<br>            <span class="hljs-comment">//US***********</span><br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (tax == DE_Tax)&#123;<br>            <span class="hljs-comment">//DE***********</span><br>        &#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (tax == FR_Tax)&#123;  <span class="hljs-comment">//更改</span><br>			<span class="hljs-comment">//...</span><br>		&#125;<br><br>        <span class="hljs-comment">//...</span><br>     	<span class="hljs-comment">//动态地去看这个问题...</span><br>     &#125;<br>    <br>&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//method 2</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TaxStrategy</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">//纯虚方法</span><br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Calculate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Context&amp; context)</span></span>=<span class="hljs-number">0</span>;<br>    <span class="hljs-comment">//基类一定要写虚析构</span><br>    <span class="hljs-keyword">virtual</span> ~TaxStrategy()&#123;&#125;<br>&#125;;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CNTax</span> :</span> <span class="hljs-keyword">public</span> TaxStrategy&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Calculate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Context&amp; context)</span></span>&#123;<br>        <span class="hljs-comment">//***********</span><br>    &#125;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">USTax</span> :</span> <span class="hljs-keyword">public</span> TaxStrategy&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Calculate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Context&amp; context)</span></span>&#123;<br>        <span class="hljs-comment">//***********</span><br>    &#125;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DETax</span> :</span> <span class="hljs-keyword">public</span> TaxStrategy&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Calculate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Context&amp; context)</span></span>&#123;<br>        <span class="hljs-comment">//***********</span><br>    &#125;<br>&#125;;<br><br><br><br><span class="hljs-comment">//扩展</span><br><span class="hljs-comment">//*********************************</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FRTax</span> :</span> <span class="hljs-keyword">public</span> TaxStrategy&#123;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Calculate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Context&amp; context)</span></span>&#123;<br>		<span class="hljs-comment">//.........</span><br>	&#125;<br>&#125;;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SalesOrder</span>&#123;</span><br><span class="hljs-keyword">private</span>:<br>    TaxStrategy* strategy;<br><br><span class="hljs-keyword">public</span>:<br>    SalesOrder(StrategyFactory* strategyFactory)&#123;<br>        <span class="hljs-comment">//这里以后可以用工厂方法</span><br>        <span class="hljs-keyword">this</span>-&gt;strategy = strategyFactory-&gt;NewStrategy();<br>    &#125;<br>    ~SalesOrder()&#123;<br>        <span class="hljs-keyword">delete</span> <span class="hljs-keyword">this</span>-&gt;strategy;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">CalculateTax</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-comment">//...</span><br>        <span class="hljs-function">Context <span class="hljs-title">context</span><span class="hljs-params">()</span></span>;<br>        <br>        <span class="hljs-keyword">double</span> val = <br>            strategy-&gt;Calculate(context); <span class="hljs-comment">//多态调用</span><br>        <span class="hljs-comment">//...</span><br>    &#125;<br>    <br>&#125;;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>method 1 违背开放封闭原则，在编译后的二进制代码修改大, method 2 SalesOrder稳定，算法可变化。</p>
+</blockquote>
+<h3 id="结构（Structure）-1"><a href="#结构（Structure）-1" class="headerlink" title="结构（Structure）"></a>结构（Structure）</h3><p><img src=".\strategy.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="要点总结-1"><a href="#要点总结-1" class="headerlink" title="要点总结"></a>要点总结</h3><ul>
+<li>Strategy及其子类为组件提供了一系列可重用的算法，从而可以使 得类型在<strong>运行时</strong>方便地根据需要在各个算法之间进行切换（多态调用）。</li>
+<li>Strategy模式提供了用条件判断语句以外的另一种选择，消除<strong>条件判断语句（bad smell，结构化思维）</strong>，就是在<strong>解耦合</strong>。含有许多条件判断语句的代码通常都需要Strategy模式。</li>
+<li>如果Strategy对象<strong>没有实例变量</strong>(单例模式实现)，那么各个上下文可以共享同一个Strategy对象，从而节省对象开销。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://refactoring.guru/design-patterns/strategy"> 网站章节学习资料</a></p>
+<p><br></p>
+<hr>
+<p><br></p>
+<h2 id="🌿Observer-Event"><a href="#🌿Observer-Event" class="headerlink" title="🌿Observer/Event"></a>🌿Observer/Event</h2><p>​            定义对象间的一种<strong>一对多（变化）的依赖关系</strong>，以便当一个对象(Subject)的状态发生改变时，所有<strong>依赖于它的对象都得到通知并自动更新</strong>。                                                                                                                                                                                ——《设计模式》GoF</p>
+<h3 id="动机（Motivation）-2"><a href="#动机（Motivation）-2" class="headerlink" title="动机（Motivation）"></a>动机（Motivation）</h3><ul>
+<li>在软件构建过程中，我们需要为某些对象建立一种“通知依赖关系” —— 一个对象（目标对象）的状态发生改变，所有的依赖对象（观察者对象）都将得到通知。如果这样的依赖关系过于紧密， 将使软件不能很好地抵御变化。</li>
+<li>使用面向对象技术，可以将这种依赖关系弱化，并形成一种稳定的依赖关系。从而实现软件体系结构的松耦合。</li>
+</ul>
+<h3 id="示例👇（文件分割器）"><a href="#示例👇（文件分割器）" class="headerlink" title="示例👇（文件分割器）"></a>示例👇（文件分割器）</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//method 1</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileSplitter</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-built_in">string</span> m_filePath;<br>	<span class="hljs-keyword">int</span> m_fileNumber;<br>    <span class="hljs-comment">// ！！违背依赖倒置原则，ProgressBar（太过细节），可能是label，可能是控制台的···</span><br>    <span class="hljs-comment">// 依赖它的抽象基类，它的功能-&gt;实现通知</span><br>	ProgressBar* m_progressBar;<br><br><span class="hljs-keyword">public</span>:<br>	FileSplitter(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; filePath, <span class="hljs-keyword">int</span> fileNumber, ProgressBar* progressBar) :<br>		m_filePath(filePath), <br>		m_fileNumber(fileNumber),<br>		m_progressBar(progressBar)&#123;<br><br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">split</span><span class="hljs-params">()</span></span>&#123;<br><br>		<span class="hljs-comment">//1.读取大文件</span><br><br>		<span class="hljs-comment">//2.分批次向小文件中写入</span><br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m_fileNumber; i++)&#123;<br>			<span class="hljs-comment">//...</span><br>            <span class="hljs-keyword">if</span>(m_progressBar!=<span class="hljs-literal">nullptr</span>)<br>            &#123;<br>                <span class="hljs-keyword">float</span> progressValue = m_fileNumber;<br>				progressValue = (i + <span class="hljs-number">1</span>) / progressValue;<br>				m_progressBar-&gt;setValue(progressValue);    <br>            &#125;<br>		&#125;<br>	&#125;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainForm</span> :</span> <span class="hljs-keyword">public</span> Form<br>&#123;<br>    <span class="hljs-comment">//文件路径</span><br>	TextBox* txtFilePath;<br>    <span class="hljs-comment">//文件被分割的数量</span><br>	TextBox* txtFileNumber;<br>	ProgressBar* progressBar;<br><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Button1_Click</span><span class="hljs-params">()</span></span>&#123;<br><br>		<span class="hljs-built_in">string</span> filePath = txtFilePath-&gt;getText();<br>		<span class="hljs-keyword">int</span> number = atoi(txtFileNumber-&gt;getText().c_str());<br><br>		<span class="hljs-function">FileSplitter <span class="hljs-title">splitter</span><span class="hljs-params">(filePath, number, progressBar)</span></span>;<br><br>		splitter.split();<br><br>	&#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//method 2</span><br><span class="hljs-comment">//IProgress 抽象接口</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IProgress</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoProgress</span><span class="hljs-params">(<span class="hljs-keyword">float</span> value)</span></span>=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">virtual</span> ~IProgress()&#123;&#125;<br>&#125;;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileSplitter</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-built_in">string</span> m_filePath;<br>	<span class="hljs-keyword">int</span> m_fileNumber;<br><br>	List&lt;IProgress*&gt;  m_iprogressList; <span class="hljs-comment">// 抽象通知机制，支持多个观察者</span><br>	<br><span class="hljs-keyword">public</span>:<br>	FileSplitter(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; filePath, <span class="hljs-keyword">int</span> fileNumber) :<br>		m_filePath(filePath), <br>		m_fileNumber(fileNumber)&#123;<br><br>	&#125;<br><br><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">split</span><span class="hljs-params">()</span></span>&#123;<br><br>		<span class="hljs-comment">//1.读取大文件</span><br><br>		<span class="hljs-comment">//2.分批次向小文件中写入</span><br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m_fileNumber; i++)&#123;<br>			<span class="hljs-comment">//...</span><br><br>			<span class="hljs-keyword">float</span> progressValue = m_fileNumber;<br>			progressValue = (i + <span class="hljs-number">1</span>) / progressValue;<br>			onProgress(progressValue);<span class="hljs-comment">//发送通知</span><br>		&#125;<br><br>	&#125;<br><br><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addIProgress</span><span class="hljs-params">(IProgress* iprogress)</span></span>&#123;<br>		m_iprogressList.push_back(iprogress);<br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">removeIProgress</span><span class="hljs-params">(IProgress* iprogress)</span></span>&#123;<br>		m_iprogressList.remove(iprogress);<br>	&#125;<br><br><br><span class="hljs-keyword">protected</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onProgress</span><span class="hljs-params">(<span class="hljs-keyword">float</span> value)</span></span>&#123;<br>		<br>		List&lt;IProgress*&gt;::iterator itor=m_iprogressList.begin();<br><br>		<span class="hljs-keyword">while</span> (itor != m_iprogressList.end() )<br>			(*itor)-&gt;DoProgress(value); <span class="hljs-comment">//更新进度条</span><br>			itor++;<br>		&#125;<br>	&#125;<br>&#125;;<br><br><span class="hljs-comment">// 多继承使用的场景：主继承类+接口（抽象类）</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainForm</span> :</span> <span class="hljs-keyword">public</span> Form, <span class="hljs-keyword">public</span> IProgress<br>&#123;<br>	TextBox* txtFilePath;<br>	TextBox* txtFileNumber;<br><br>	ProgressBar* progressBar;<br><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Button1_Click</span><span class="hljs-params">()</span></span>&#123;<br><br>		<span class="hljs-built_in">string</span> filePath = txtFilePath-&gt;getText();<br>		<span class="hljs-keyword">int</span> number = atoi(txtFileNumber-&gt;getText().c_str());<br><br>		ConsoleNotifier cn;<br><br>		<span class="hljs-function">FileSplitter <span class="hljs-title">splitter</span><span class="hljs-params">(filePath, number)</span></span>;<br><br>		splitter.addIProgress(<span class="hljs-keyword">this</span>); <span class="hljs-comment">//订阅通知</span><br>		splitter.addIProgress(&amp;cn)； <span class="hljs-comment">//订阅通知</span><br><br>		splitter.split();<br><br>		splitter.removeIProgress(<span class="hljs-keyword">this</span>);<br><br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoProgress</span><span class="hljs-params">(<span class="hljs-keyword">float</span> value)</span></span>&#123;<br>		progressBar-&gt;setValue(value);<br>	&#125;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsoleNotifier</span> :</span> <span class="hljs-keyword">public</span> IProgress &#123;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoProgress</span><span class="hljs-params">(<span class="hljs-keyword">float</span> value)</span></span>&#123;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;.&quot;</span>;<br>	&#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="结构（Structure）-2"><a href="#结构（Structure）-2" class="headerlink" title="结构（Structure）"></a>结构（Structure）</h3><p>![.\observer.png)</p>
+<ul>
+<li>样例中 Observer是IProgress，而MainForm、ConsoleNotifier是ConcreteObserver</li>
+<li>样例中 Subject是FileSplitter（其实FileSplitter可以提取addIProgress，removeIProgress和onProgress）</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>使用面向对象的抽象，Observer模式使得我们可以独立地改变目标与观察者，从而使<strong>二者之间的依赖关系达致松耦合</strong>。</li>
+</ul>
+<blockquote>
+<p>IProgress不管多少个，FileSplitter都不变，保持复用性</p>
+</blockquote>
+<ul>
+<li>目标发送通知时，<strong>无需指定观察者</strong>，通知（可以携带通知信息作为参数）会自动传播。</li>
+</ul>
+<blockquote>
+<p>FileSplitter执行DoProgress不关心是那个观察者，抽象地进行通知，自动传播</p>
+</blockquote>
+<ul>
+<li>观察者自己决定是否需要订阅通知，目标对象对此一无所知。 </li>
+</ul>
+<blockquote>
+<p>MainForm执行addIProgress</p>
+</blockquote>
+<ul>
+<li>Observer模式是<strong>基于事件的UI框架</strong>中非常常用的设计模式，也是<strong>MVC模式</strong>的一个重要组成部分。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://refactoring.guru/design-patterns/observer"> 网站章节学习资料，核心：抽象的通知依赖关系</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-cpp-%E6%9D%8E%E5%BB%BA%E5%BF%A0/">-设计模式 -cpp -李建忠</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/24/GoF-%E5%88%86%E7%B1%BB/">
+                        <span class="hidden-mobile">GoF_分类</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '4c1cc64f58db04df20d1',
+          clientSecret: '60df911ad9c5263324a2797ea783b31c4f05eb92',
+          repo: 'gitalk-comment',
+          owner: 'qingcai56',
+          admin: ["qingcai56"],
+          id: 'b5790da37e167d6dac338bbd727a4639',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200&display=swap" rel="stylesheet">
+        </div>
+      </div>
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
