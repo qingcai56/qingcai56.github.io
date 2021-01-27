@@ -1,0 +1,580 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shuye.png">
+  <link rel="icon" type="image/png" href="/img/shuye.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="learning">
+  <meta name="author" content="qingcai56">
+  <meta name="keywords" content="">
+  <title>GoF_对象创建模式 - qingcai56&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>八百物屋</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/astronaut.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="GoF_对象创建模式">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-27 09:32" pubdate>
+        January 27, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">GoF_对象创建模式</h1>
+            
+            <div class="markdown-body">
+              <h1 id="对象创建”-模式"><a href="#对象创建”-模式" class="headerlink" title="对象创建” 模式"></a>对象创建” 模式</h1><p>通过“对象创建” 模式绕开new，来<strong>避免对象创建（new）过程中所导致的紧耦合</strong>（依赖具体类），从而支持对象创建的稳定。它是接口抽象之后的第一步工作。</p>
+<p><strong>典型模式</strong>：</p>
+<ul>
+<li>Factory Method</li>
+<li>Abstract Factory</li>
+<li>Prototype</li>
+<li>Builder</li>
+</ul>
+<h2 id="🌿Factory-Method（工厂方法）"><a href="#🌿Factory-Method（工厂方法）" class="headerlink" title="🌿Factory Method（工厂方法）"></a>🌿Factory Method（工厂方法）</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>定义一个用于<strong>创建对象的接口</strong>，让<strong>子类决定实例化哪一个类</strong>。 Factory Method使得一个类的<strong>实例化延迟</strong>（<strong>目的：解耦， 手段：虚函数</strong>）到子类。</p>
+<h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><ul>
+<li>在软件系统中，经常面临着创建对象的工作；由于需求的变化， <strong>需要创建的对象的具体类型经常变化</strong>。</li>
+<li>如何应对这种变化？如何绕过常规的对象创建方法(new)，提供一 种“封装机制”来避免客户程序和这种“具体对象创建工作”的紧耦合？</li>
+</ul>
+<h3 id="样例👇（文件分割器）"><a href="#样例👇（文件分割器）" class="headerlink" title="样例👇（文件分割器）"></a>样例👇（文件分割器）</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//method 1</span><br><span class="hljs-comment">/*FileSplitter1.cpp*/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ISplitter</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">split</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">virtual</span> ~ISplitter()&#123;&#125;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySplitter</span> :</span> <span class="hljs-keyword">public</span> ISplitter&#123;<br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TxtSplitter</span>:</span> <span class="hljs-keyword">public</span> ISplitter&#123;<br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PictureSplitter</span>:</span> <span class="hljs-keyword">public</span> ISplitter&#123;<br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VideoSplitter</span>:</span> <span class="hljs-keyword">public</span> ISplitter&#123;<br>    <br>&#125;;<br><br><span class="hljs-comment">/*****************************************************/</span><br><span class="hljs-comment">/*MainForm1.cpp*/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainForm</span> :</span> <span class="hljs-keyword">public</span> Form<br>&#123;<br>	TextBox* txtFilePath;<br>	TextBox* txtFileNumber;<br>	ProgressBar* progressBar;<br><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Button1_Click</span><span class="hljs-params">()</span></span>&#123;<br><br><br>		<span class="hljs-comment">//ISplitter 面向接口编程</span><br>        <span class="hljs-comment">//依赖具体类,抽象依赖具体实现，即BinarySplitter</span><br>		ISplitter * splitter=<br>            <span class="hljs-keyword">new</span> BinarySplitter();<br>        <br>        splitter-&gt;split();<br><br>	&#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>方法一中 MainForm1编译依赖于FileSplitter1，违反依赖倒置原则，当需要创建的对象改变时，MainForm1.cpp文件也会发生改变</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//method 2</span><br><span class="hljs-comment">/*ISplitterFactory.cpp*/</span><br><span class="hljs-comment">//抽象类</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ISplitter</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">split</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">virtual</span> ~ISplitter()&#123;&#125;<br>&#125;;<br><br><br><span class="hljs-comment">//工厂基类</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SplitterFactory</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> ISplitter* <span class="hljs-title">CreateSplitter</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">virtual</span> ~SplitterFactory()&#123;&#125;<br>&#125;;<br><br><span class="hljs-comment">/*********************************************************************/</span><br><span class="hljs-comment">/*ISplitter.cpp*/</span><br><span class="hljs-comment">//具体类</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySplitter</span> :</span> <span class="hljs-keyword">public</span> ISplitter&#123;<br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TxtSplitter</span>:</span> <span class="hljs-keyword">public</span> ISplitter&#123;<br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PictureSplitter</span>:</span> <span class="hljs-keyword">public</span> ISplitter&#123;<br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VideoSplitter</span>:</span> <span class="hljs-keyword">public</span> ISplitter&#123;<br>    <br>&#125;;<br><br><span class="hljs-comment">//具体工厂</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySplitterFactory</span>:</span> <span class="hljs-keyword">public</span> SplitterFactory&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> ISplitter* <span class="hljs-title">CreateSplitter</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BinarySplitter();<br>    &#125;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TxtSplitterFactory</span>:</span> <span class="hljs-keyword">public</span> SplitterFactory&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> ISplitter* <span class="hljs-title">CreateSplitter</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> TxtSplitter();<br>    &#125;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PictureSplitterFactory</span>:</span> <span class="hljs-keyword">public</span> SplitterFactory&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> ISplitter* <span class="hljs-title">CreateSplitter</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> PictureSplitter();<br>    &#125;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VideoSplitterFactory</span>:</span> <span class="hljs-keyword">public</span> SplitterFactory&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> ISplitter* <span class="hljs-title">CreateSplitter</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> VideoSplitter();<br>    &#125;<br>&#125;;<br><br><span class="hljs-comment">/************************************************************************/</span><br><span class="hljs-comment">/*MainForm2.cpp*/</span><br><span class="hljs-comment">// ！！！MainForm现在只依赖抽象基类，不依赖具体类</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainForm</span> :</span> <span class="hljs-keyword">public</span> Form<br>&#123;<br>    SplitterFactory*  factory;<span class="hljs-comment">//工厂</span><br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">//只依赖与外界传来的Splitter类型，根据外界传来的类型多态创建</span><br>    MainForm(SplitterFactory*  factory)&#123;<br>        <span class="hljs-keyword">this</span>-&gt;factory=factory;<br>    &#125;<br>    <br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Button1_Click</span><span class="hljs-params">()</span></span>&#123;<br><br>        <br>		ISplitter * splitter=<br>            factory-&gt;CreateSplitter(); <span class="hljs-comment">//多态new</span><br>        <br>        splitter-&gt;split();<br><br>	&#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p><img src="D:\blog\source\_posts\GoF-对象创建模式\structrue.png" srcset="/img/loading.gif" alt="image-20210127113808383"></p>
+<h3 id="要点总结"><a href="#要点总结" class="headerlink" title="要点总结"></a>要点总结</h3><ul>
+<li>Factory Method模式用于<strong>隔离类对象的使用者和具体类型之间的耦合关系</strong>。面对一个经常变化的具体类型，紧耦合关系(new)会导致软件的脆弱。</li>
+<li>Factory Method模式通过面向对象的手法（<strong>多态</strong>），将所要创建的<strong>具体对象工作延迟到子类</strong>，从而实现一种<strong>扩展（而非更改）</strong>的策略，较好 地解决了这种紧耦合关系。 </li>
+<li>Factory Method模式解决“单个对象”的需求变化。缺点在于要求<strong>创建方法/参数相同</strong>。</li>
+</ul>
+<h2 id="🌿Abstract-Factory-抽象工厂"><a href="#🌿Abstract-Factory-抽象工厂" class="headerlink" title="🌿Abstract Factory 抽象工厂"></a>🌿Abstract Factory 抽象工厂</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>提供一个接口，让该接口负责创建<strong>一系列“相关或者相互依赖的对象”</strong>，无需指定它们具体的类。</p>
+<h3 id="动机-1"><a href="#动机-1" class="headerlink" title="动机"></a>动机</h3><p>在软件系统中，经常面临着“<strong>一系列相互依赖的对象</strong>”的创建工作；同时，由于需求的变化，往往存在更多系列对象的创建工作。 </p>
+<p>如何应对这种变化？如何绕过常规的对象创建方法(new)，提供一 种“封装机制”来避免客户程序和这种“多系列具体对象创建工作” 的紧耦合？</p>
+<h3 id="样例👇（写数据访问）"><a href="#样例👇（写数据访问）" class="headerlink" title="样例👇（写数据访问）"></a>样例👇（写数据访问）</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//method 1 直接创建</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EmployeeDAO</span>&#123;</span><br>    <br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;EmployeeDO&gt; <span class="hljs-title">GetEmployees</span><span class="hljs-params">()</span></span>&#123;<br>        SqlConnection* connection =<br>            <span class="hljs-keyword">new</span> SqlConnection();<br>        connection-&gt;ConnectionString = <span class="hljs-string">&quot;...&quot;</span>;<br><br>        SqlCommand* command =<br>            <span class="hljs-keyword">new</span> SqlCommand();<br>        command-&gt;CommandText=<span class="hljs-string">&quot;...&quot;</span>;<br>        command-&gt;SetConnection(connection);<br><br>        SqlDataReader* reader = command-&gt;ExecuteReader();<br>        <span class="hljs-keyword">while</span> (reader-&gt;Read())&#123;<br><br>        &#125;<br><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// method 2 工厂方法</span><br><span class="hljs-comment">//数据库访问有关的基类</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IDBConnection</span>&#123;</span><br>    <br>&#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IDBConnectionFactory</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> IDBConnection* <span class="hljs-title">CreateDBConnection</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>&#125;;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IDBCommand</span>&#123;</span><br>    <br>&#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IDBCommandFactory</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> IDBCommand* <span class="hljs-title">CreateDBCommand</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>&#125;;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IDataReader</span>&#123;</span><br>    <br>&#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IDataReaderFactory</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> IDataReader* <span class="hljs-title">CreateDataReader</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>&#125;;<br><br><br><span class="hljs-comment">//具体实现</span><br><br><span class="hljs-comment">//支持SQL Server</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SqlConnection</span>:</span> <span class="hljs-keyword">public</span> IDBConnection&#123;<br>    <br>&#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SqlConnectionFactory</span>:</span><span class="hljs-keyword">public</span> IDBConnectionFactory&#123;<br>    <br>&#125;;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SqlCommand</span>:</span> <span class="hljs-keyword">public</span> IDBCommand&#123;<br>    <br>&#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SqlCommandFactory</span>:</span><span class="hljs-keyword">public</span> IDBCommandFactory&#123;<br>    <br>&#125;;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SqlDataReader</span>:</span> <span class="hljs-keyword">public</span> IDataReader&#123;<br>    <br>&#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SqlDataReaderFactory</span>:</span><span class="hljs-keyword">public</span> IDataReaderFactory&#123;<br>    <br>&#125;;<br><br><span class="hljs-comment">//支持Oracle</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OracleConnection</span>:</span> <span class="hljs-keyword">public</span> IDBConnection&#123;<br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OracleCommand</span>:</span> <span class="hljs-keyword">public</span> IDBCommand&#123;<br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OracleDataReader</span>:</span> <span class="hljs-keyword">public</span> IDataReader&#123;<br>    <br>&#125;;<br><br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EmployeeDAO</span>&#123;</span><br>    IDBConnectionFactory* dbConnectionFactory;<br>    IDBCommandFactory* dbCommandFactory;<br>    IDataReaderFactory* dataReaderFactory;<br>    <br>    <br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;EmployeeDO&gt; <span class="hljs-title">GetEmployees</span><span class="hljs-params">()</span></span>&#123;<br>        IDBConnection* connection =<br>            dbConnectionFactory-&gt;CreateDBConnection();<br>        connection-&gt;ConnectionString(<span class="hljs-string">&quot;...&quot;</span>);<br><br>        IDBCommand* command =<br>            dbCommandFactory-&gt;CreateDBCommand();<br>        command-&gt;CommandText(<span class="hljs-string">&quot;...&quot;</span>);<br>        command-&gt;SetConnection(connection); <span class="hljs-comment">//关联性</span><br><br>        IDBDataReader* reader = command-&gt;ExecuteReader(); <span class="hljs-comment">//关联性</span><br>        <span class="hljs-keyword">while</span> (reader-&gt;Read())&#123;<br><br>        &#125;<br><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>问题 dbConnection、dbCommand、dataReader存在关联性，如果传过来的参数不一样怎么办？</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// Method 3 抽象工厂（family）</span><br><span class="hljs-comment">//数据库访问有关的基类</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IDBConnection</span>&#123;</span><br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IDBCommand</span>&#123;</span><br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IDataReader</span>&#123;</span><br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IDBFactory</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> IDBConnection* <span class="hljs-title">CreateDBConnection</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> IDBCommand* <span class="hljs-title">CreateDBCommand</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> IDataReader* <span class="hljs-title">CreateDataReader</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>    <br>&#125;;<br><br><span class="hljs-comment">//具体实现</span><br><span class="hljs-comment">//支持SQL Server</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SqlConnection</span>:</span> <span class="hljs-keyword">public</span> IDBConnection&#123;<br>    <br>&#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SqlCommand</span>:</span> <span class="hljs-keyword">public</span> IDBCommand&#123;<br>    <br>&#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SqlDataReader</span>:</span> <span class="hljs-keyword">public</span> IDataReader&#123;<br>    <br>&#125;;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SqlDBFactory</span>:</span><span class="hljs-keyword">public</span> IDBFactory&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> IDBConnection* <span class="hljs-title">CreateDBConnection</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> IDBCommand* <span class="hljs-title">CreateDBCommand</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> IDataReader* <span class="hljs-title">CreateDataReader</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br> <br>&#125;;<br><br><span class="hljs-comment">//支持Oracle</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OracleConnection</span>:</span> <span class="hljs-keyword">public</span> IDBConnection&#123;<br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OracleCommand</span>:</span> <span class="hljs-keyword">public</span> IDBCommand&#123;<br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OracleDataReader</span>:</span> <span class="hljs-keyword">public</span> IDataReader&#123;<br>    <br>&#125;;<br><br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EmployeeDAO</span>&#123;</span><br>    IDBFactory* dbFactory;<br>    <br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;EmployeeDO&gt; <span class="hljs-title">GetEmployees</span><span class="hljs-params">()</span></span>&#123;<br>        IDBConnection* connection =<br>            dbFactory-&gt;CreateDBConnection();<br>        connection-&gt;ConnectionString(<span class="hljs-string">&quot;...&quot;</span>);<br><br>        IDBCommand* command =<br>            dbFactory-&gt;CreateDBCommand();<br>        command-&gt;CommandText(<span class="hljs-string">&quot;...&quot;</span>);<br>        command-&gt;SetConnection(connection); <span class="hljs-comment">//关联性</span><br><br>        IDBDataReader* reader = command-&gt;ExecuteReader(); <span class="hljs-comment">//关联性</span><br>        <span class="hljs-keyword">while</span> (reader-&gt;Read())&#123;<br><br>        &#125;<br><br>    &#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+<h3 id="结构-1"><a href="#结构-1" class="headerlink" title="结构"></a>结构</h3><p><img src="D:\blog\source\_posts\GoF-对象创建模式\structrue2.png" srcset="/img/loading.gif" alt="image-20210127120034903"></p>
+<h3 id="要点总结-1"><a href="#要点总结-1" class="headerlink" title="要点总结"></a>要点总结</h3><ul>
+<li>如果<strong>没有应对“多系列对象构建”</strong>的需求变化，则没有必要使用Abstract Factory模式，这时候使用简单的工厂完全可以。</li>
+<li>“系列对象”指的是在某一特定系列下的对象之间<strong>有相互依赖、 或作用的关系</strong>。不同系列的对象之间不能相互依赖。 </li>
+<li>Abstract Factory模式主要在于<strong>应对“新系列”</strong>的需求变动。其缺 点在于<strong>难以应对“新对象”</strong>的需求变动。</li>
+</ul>
+<h2 id="🌿Decorator"><a href="#🌿Decorator" class="headerlink" title="🌿Decorator"></a>🌿Decorator</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><h3 id="动机-2"><a href="#动机-2" class="headerlink" title="动机"></a>动机</h3><h3 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h3><h3 id="结构-2"><a href="#结构-2" class="headerlink" title="结构"></a>结构</h3><h3 id="要点总结-2"><a href="#要点总结-2" class="headerlink" title="要点总结"></a>要点总结</h3><h2 id="🌿Decorator-1"><a href="#🌿Decorator-1" class="headerlink" title="🌿Decorator"></a>🌿Decorator</h2><h3 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h3><h3 id="动机-3"><a href="#动机-3" class="headerlink" title="动机"></a>动机</h3><h3 id="样例-1"><a href="#样例-1" class="headerlink" title="样例"></a>样例</h3><h3 id="结构-3"><a href="#结构-3" class="headerlink" title="结构"></a>结构</h3><h3 id="要点总结-3"><a href="#要点总结-3" class="headerlink" title="要点总结"></a>要点总结</h3>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-cpp-%E6%9D%8E%E5%BB%BA%E5%BF%A0/">-设计模式 -cpp -李建忠</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/24/GoF-%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3/">
+                        <span class="hidden-mobile">GoF_单一职责</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '4c1cc64f58db04df20d1',
+          clientSecret: '60df911ad9c5263324a2797ea783b31c4f05eb92',
+          repo: 'gitalk-comment',
+          owner: 'qingcai56',
+          admin: ["qingcai56"],
+          id: '5070abf44dc6cdea6da47b8c8043c914',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200&display=swap" rel="stylesheet">
+        </div>
+      </div>
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

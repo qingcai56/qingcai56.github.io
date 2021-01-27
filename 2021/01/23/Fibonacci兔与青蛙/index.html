@@ -1,0 +1,648 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shuye.png">
+  <link rel="icon" type="image/png" href="/img/shuye.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="learning">
+  <meta name="author" content="qingcai56">
+  <meta name="keywords" content="">
+  <title>递归:Fibonacci（🐇🐸）与🗼 - qingcai56&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>八百物屋</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/astronaut.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="递归:Fibonacci（🐇🐸）与🗼">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-23 10:17" pubdate>
+        January 23, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">递归:Fibonacci（🐇🐸）与🗼</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Fibonacci"><a href="#Fibonacci" class="headerlink" title="Fibonacci"></a>Fibonacci</h1><h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h2><p>西元1202年，一位名叫斐波那契意大利青年在他的一部著作中提出了一个有趣的问题:   假设一对刚出生的小兔<strong>一个月后</strong>就能长成大兔，再过一个月就能生下一对小兔，并且此后每个月都生一对小兔，一年内没有发生死亡，问：一对刚出生的兔子，一年内繁殖成多少对兔子?</p>
+<p><img src=".\tuzi.jpg" srcset="/img/loading.gif" alt="" style="zoom:67%;" /></p>
+<blockquote>
+<p>黑点表示的是成熟兔子，白点表示的是小兔子</p>
+</blockquote>
+<p>由图我们可以发现这个数字是由规律的，<code>该月的兔子数=前两个月之和</code>（如果月份&gt;2的话），这很好理解，上上个月的兔子到上个月时都是成熟的兔子🐇，所以 <code>该月的兔子数=前一个月的兔子+前一个月已经成熟的兔子（即成熟的兔子）</code>公式👇</p>
+<script type="math/tex; mode=display">
+F[n]=
+\begin{cases}
+    0,n=0\\
+    1,n=1\\
+    F[n-1]+F[n-2],n>=2\\
+\end{cases}</script><p><img src=".\number.jpg" srcset="/img/loading.gif" alt="增长率0.618" style="zoom:67%;" /></p>
+<p>这就引入了斐波那契数列的问题，更多详情请看👉 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26752744">不死神兔的繁衍生息——神奇的斐波那契数列</a> </p>
+<h2 id="通项公式"><a href="#通项公式" class="headerlink" title="通项公式"></a>通项公式</h2><script type="math/tex; mode=display">
+递推公式：an=an−1+an−2(n≥3)</script><script type="math/tex; mode=display">
+裂项相消：an−λan−1=μ(an−1−λan−2)</script><script type="math/tex; mode=display">
+\begin{cases}
+    λ+μ=1\\
+    −λ×μ=1
+\end{cases}</script><p>求出λ和μ两组解放入裂项相消的原式中</p>
+<p><img src=".\formula1.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src=".\formula4.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src=".\formula3.png" srcset="/img/loading.gif" alt=""></p>
+<script type="math/tex; mode=display">
+最后求得通项公式:F(N)={5\over\sqrt5}(({1+\sqrt5\over2})^n-({1-\sqrt5\over2})^n)</script><h2 id="算法求解："><a href="#算法求解：" class="headerlink" title="算法求解："></a>算法求解：</h2><p>不展开Fibonacci的话题探讨了，我们还是用代码来解决上面这个兔子问题      （🔗👉 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/">Fibonacci Leetcode</a>）</p>
+<h3 id="递归求法"><a href="#递归求法" class="headerlink" title="递归求法"></a>递归求法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//method 1  递归算法求解</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(n&lt;=<span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">1</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> fib(n<span class="hljs-number">-1</span>)+fib(n<span class="hljs-number">-2</span>);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p><img src=".\recursion.png" srcset="/img/loading.gif" alt="递归算法n=4的过程"></p>
+<p>显然我们看到递归算法计算n=4时，f(1)被计算了三次，f(2)被计算了两次…  计算效率底下。</p>
+<script type="math/tex; mode=display">
+通项公式:F(N)={5\over\sqrt5}(({1+\sqrt5\over2})^n-({1-\sqrt5\over2})^n)</script><p>复杂度的计算：每个结点都有一次计算，我们计算总结点数即可。</p>
+<ul>
+<li>第N轮的叶子结点总数:      F[N]=F[n-1]+F[n-2]</li>
+<li>而非叶子结点加一等于叶子结点    <ul>
+<li>总结点=F[n-1]+F[n-2]+F[n-1]+F[n-2]-1=2F[n-1]+2F[N-2]-1&lt;4F[N-1]</li>
+</ul>
+</li>
+<li>显然，n趋于∞时，O（2F[n-1]+2F[N-2]-1） =  O（4F[N-1]）= O（F[N]）</li>
+</ul>
+<p>故时间复杂度，等于通项公式，去掉小于1的指数项，得：  <code>(这里O是渐进上届)</code></p>
+<script type="math/tex; mode=display">
+O({1+\sqrt5\over2})^n</script><h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> m = <span class="hljs-number">2</span>; m &lt;= n; m++) &#123;<br>        k = i + j;<br>        i = j;<br>        j = k;<br>    &#125;<br>        <span class="hljs-keyword">return</span> k;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>LeetCode注意点：答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。k = i + j这句后面加一个%1000000007即可，尽量不要在后面return再取余，先取后取结果是一样的,后取还可能溢出。</p>
+</blockquote>
+<p>迭代的<code>复杂度就是n</code>   </p>
+<h2 id="拓展：青蛙跳台阶"><a href="#拓展：青蛙跳台阶" class="headerlink" title="拓展：青蛙跳台阶"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/">拓展：青蛙跳台阶</a></h2><p>一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 <code>n</code> 级的台阶总共有多少种跳法。</p>
+<blockquote>
+<p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。</p>
+</blockquote>
+<ul>
+<li>第一级台阶有1种跳法跳上去</li>
+<li>第二级台阶有2种跳法跳上去，一种是直接跳两级台阶，一种是两次跳1级台阶</li>
+<li>第n级有<code>两种方式</code>第一种是从<code>n-1级跳1级台阶上去</code>，第二种是从<code>n-2级跳两级台阶上去</code>，所以<code>跳上n级台阶的种数有f(n-1)+f(n-2)</code></li>
+</ul>
+<script type="math/tex; mode=display">
+F[n]=
+\begin{cases}
+    1,n=1\\
+    2,n=2\\
+    F[n-1]+F[n-2],n>=3\\
+\end{cases}</script><p>Fibonacci公式同样适用于这里。 <code>//注意力扣题目样例中0级台阶也有一种跳法</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">numWays</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span> || n == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> m = <span class="hljs-number">2</span>; m &lt;= n; m++) &#123;<br>            k = (i + j) % <span class="hljs-number">1000000007</span>;<br>            i = j;<br>            j = k;<br>        &#125;<br>        <span class="hljs-keyword">return</span> k;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h1 id="汉诺塔"><a href="#汉诺塔" class="headerlink" title="汉诺塔"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/hanota-lcci/">汉诺塔</a></h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在经典汉诺塔问题中，有 3 根柱子及 N 个不同大小的穿孔圆盘，盘子可以滑入任意一根柱子。一开始，所有盘子自上而下按升序依次套在第一根柱子上(即<strong>每一个盘子只能放在更大的盘子上面</strong>)。移动圆盘时受到以下限制:<br>(1) 每次只能移动一个盘子;<br>(2) 盘子只能从柱子顶端滑出移到下一根柱子;<br>(3) 盘子只能叠在比它大的盘子上。</p>
+<p>请编写程序，用栈将所有盘子从第一根柱子移到最后一根柱子，你需要原地修改栈。</p>
+<blockquote>
+<p>吐槽：直接把第一根柱子和最后一根换一下不就得了嘛😂</p>
+</blockquote>
+<ul>
+<li><p><strong>情况1</strong>：n=1只有一个盘子，直接把A移动到C就可以了</p>
+</li>
+<li><p><strong>情况2：</strong>n=2有两个盘子👇</p>
+</li>
+</ul>
+<p><img src=".\tower1.gif" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li><p><strong>情况3</strong>：n&gt;2 ,把 n 个盘子也看成两个部分，一部分有 1 个盘子，另一部分有 n - 1个盘子。</p>
+<p><img src=".\tower2.gif" srcset="/img/loading.gif" alt=""></p>
+</li>
+</ul>
+<blockquote>
+<p>你可能会问：“那 n - 1 个盘子是怎么从 A 移到 C 的呢？”</p>
+<p>注意，当你在思考这个问题的时候，就将<strong>最初的 n 个盘子从 A 移到 C 的问题，转化成了将 n - 1 个盘子从 A 移到 C 的问题， 依次类推，直至转化成 1 个盘子的问题时，问题也就解决了</strong>。这就是分治的思想。（引用力扣作者<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/hanota-lcci/solution/tu-jie-yi-nuo-ta-de-gu-shi-ju-shuo-dang-64ge-pan-z/">z1m🔗</a>）</p>
+</blockquote>
+<h2 id="算法求解"><a href="#算法求解" class="headerlink" title="算法求解"></a>算法求解</h2><ul>
+<li>n = 1 时，直接把盘子从 A 移到 C；</li>
+<li>n &gt; 1 时，<ul>
+<li>先把上面 n - 1 个盘子从 A 移到 B（子问题，递归）；</li>
+<li>再将最大的盘子从 A 移到 C；</li>
+<li>再将 B 上 n - 1 个盘子从 B 移到 C（子问题，递归）。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">hanota</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; A, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; B, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; C)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> n=A.size();<br>        move(n,A,B,C);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">move</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n,<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; A, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; B, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; C)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">1</span>)&#123;<br>            C.push_back(A.back());<br>            A.pop_back();<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-comment">//先把上面n-1个盘子从A移到B（子问题，递归）</span><br>            move(n<span class="hljs-number">-1</span>,A,C,B);<br>            <span class="hljs-comment">//再将最大的盘子从 A 移到 C</span><br>            C.push_back(A.back());<br>            A.pop_back();<br>            <span class="hljs-comment">//再将B上n-1个盘子从B移到C（子问题，递归）</span><br>            move(n<span class="hljs-number">-1</span>,B,A,C);<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">-算法总结</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/23/GoF-%E5%88%86%E7%B1%BB/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">GoF_分类</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/23/%E5%9B%9E%E6%96%87%E4%B8%8E%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%8C%96/">
+                        <span class="hidden-mobile">回文与进制转化</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '4c1cc64f58db04df20d1',
+          clientSecret: '60df911ad9c5263324a2797ea783b31c4f05eb92',
+          repo: 'gitalk-comment',
+          owner: 'qingcai56',
+          admin: ["qingcai56"],
+          id: '7716f3ec6bdd2f89053d99125dc25e86',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200&display=swap" rel="stylesheet">
+        </div>
+      </div>
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
