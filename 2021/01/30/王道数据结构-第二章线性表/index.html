@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shuye.png">
+  <link rel="icon" type="image/png" href="/img/shuye.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="learning">
+  <meta name="author" content="qingcai56">
+  <meta name="keywords" content="">
+  <title>王道数据结构_第二章线性表 - qingcai56&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>八百物屋</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/astronaut.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="王道数据结构_第二章线性表">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-30 10:56" pubdate>
+        January 30, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      35
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">王道数据结构_第二章线性表</h1>
+            
+            <div class="markdown-body">
+              <h1 id="线性表-linear-list"><a href="#线性表-linear-list" class="headerlink" title="线性表(linear list)"></a>线性表(linear list)</h1><p><strong>逻辑结构、数据运算、存储结构</strong></p>
+<h3 id="🎈定义"><a href="#🎈定义" class="headerlink" title="🎈定义"></a>🎈定义</h3><p>线性表是具有<strong>相同数据类型</strong>的n（n&gt;=0）个数据元素的<strong>有限 序列</strong>，其中n为表长，当n=0时线性表是一个空表。若L命令线性表，则其一般表示为</p>
+<script type="math/tex; mode=display">
+L=(a_1,a_2,...,a_i,a_{i+1},a_n)</script><p><img src=".\1.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="🎉基本运算"><a href="#🎉基本运算" class="headerlink" title="🎉基本运算"></a>🎉基本运算</h3><p><img src=".\2.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="🌿顺序表"><a href="#🌿顺序表" class="headerlink" title="🌿顺序表"></a>🌿顺序表</h2><h3 id="🎈定义-1"><a href="#🎈定义-1" class="headerlink" title="🎈定义"></a>🎈定义</h3><p><strong>线性表的顺序存储</strong>称为顺序表。逻辑上相邻的元素物理位置也相邻</p>
+<p><img src=".\3.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="静态分配"><a href="#静态分配" class="headerlink" title="静态分配"></a>静态分配</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/***** 静态分配 ******/</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MaxSize 10      <span class="hljs-comment">//定义最大长度</span></span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>    <span class="hljs-keyword">int</span> data[MaxSize];  <span class="hljs-comment">//静态的&quot;数组&quot;存放数据元素</span><br>    <span class="hljs-keyword">int</span> length;         <span class="hljs-comment">//顺序表当前长度</span><br>&#125;SqList;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">InitList</span><span class="hljs-params">(SqList&amp; L)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; MaxSize; i++)<br>    &#123;<br>        L.data[i] = <span class="hljs-number">0</span>;<br>    &#125;<br>    L.length = <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="动态分配"><a href="#动态分配" class="headerlink" title="动态分配"></a>动态分配</h4><p><strong>malloc函数：</strong></p>
+<script type="math/tex; mode=display">
+L.data = (ElemType *)malloc(sizeof(ElemType)*InitSize);</script><ol>
+<li>开辟<code>InitSize</code>×<code>sizeof（）</code>大小的内存区域</li>
+<li>将其强制类型转化为<code>该类型</code>指针，返回该内存地址的首地址</li>
+</ol>
+<p><strong>new函数（c++）：</strong></p>
+<script type="math/tex; mode=display">
+L.data = new \quad ElemType[InitSize];</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/***** 动态分配 ******/</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> InitSize 10     <span class="hljs-comment">//定义初始长度</span></span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>    <span class="hljs-keyword">int</span> *Data;          <span class="hljs-comment">//动态分配数组的指针</span><br>    <span class="hljs-keyword">int</span> MaxSize;        <span class="hljs-comment">//最大长度</span><br>    <span class="hljs-keyword">int</span> Length;         <span class="hljs-comment">//当前长度</span><br>&#125;SeqList;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">InitList</span><span class="hljs-params">(SeqList&amp; L)</span></span><br><span class="hljs-function"></span>&#123;<br>    L.Data = (<span class="hljs-keyword">int</span>*)<span class="hljs-built_in">malloc</span>(InitSize * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));<br>    L.Length = <span class="hljs-number">0</span>;<br>    L.MaxSize = InitSize;<br>&#125;  <br><br><span class="hljs-comment">//顺序表满时，再用malloc动态拓展顺序的最大容量</span><br><span class="hljs-comment">//将数据元素复制到新的存储区域，并用free函数释放原区域</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">IncreaseSize</span><span class="hljs-params">(SeqList&amp; L, <span class="hljs-keyword">int</span> Len)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span>* P = L.Data;<br>    <span class="hljs-comment">//l存data的整个内存空间发生了转移，复制复制到了新的区域</span><br>    L.Data = (<span class="hljs-keyword">int</span>*)<span class="hljs-built_in">malloc</span>((l.MaxSize + Len) * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;L.Length; i++)<br>    &#123;<br>        L.Data[i] = P[i];<br>    &#125;<br>    L.MaxSize += Len;<br>    <span class="hljs-built_in">free</span>(P);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>随机访问，可以在O(1)时间内找到第<code>i</code>个元素</li>
+<li>存储密度高，每个结点只存储数据元素</li>
+<li>插入删除，拓展容量等操作不方便</li>
+</ul>
+<h3 id="🎉顺序表上的基本操作"><a href="#🎉顺序表上的基本操作" class="headerlink" title="🎉顺序表上的基本操作"></a>🎉顺序表上的基本操作</h3><h4 id="ListInsert-amp-L-i-e"><a href="#ListInsert-amp-L-i-e" class="headerlink" title="ListInsert(&amp;L,i,e)"></a>ListInsert(&amp;L,i,e)</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//时间复杂度最好O(1)，最坏时间复杂度O(n)，平均O(N/2)=O(N)</span><br><span class="hljs-comment">//插入的元素依次后移，填上空挡</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">ListInsert</span><span class="hljs-params">(SqList&amp; L, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> e)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//存储空间已经满了</span><br>    <span class="hljs-keyword">if</span> (L.length&gt;=MaxSize)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-comment">//插入位置有问题</span><br>    <span class="hljs-keyword">if</span> (i&lt;<span class="hljs-number">1</span>||i&gt;L.length+<span class="hljs-number">1</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = L.length; k &gt; i; k--)<br>    &#123;<br>        L.data[k] = L.data[k - <span class="hljs-number">1</span>];<br>    &#125;<br>    L.data[i - <span class="hljs-number">1</span>] = e;<br>    L.length++;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="ListDelete-amp-L-i-amp-e"><a href="#ListDelete-amp-L-i-amp-e" class="headerlink" title="ListDelete(&amp;L,i,&amp;e)"></a>ListDelete(&amp;L,i,&amp;e)</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//时间复杂度最好O(1)，最坏时间复杂度O(n)，平均O(N/2)=O(N)</span><br><span class="hljs-comment">//删除的元素依次前移，填上空挡</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">ListDelete</span><span class="hljs-params">(SqList&amp; L, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span>&amp; e)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (i&lt;i||i&gt;L.length)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    e = L.data[i - <span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = i; k &lt; L.length; k++)<br>    &#123;<br>        L.data[i - <span class="hljs-number">1</span>] = L.data[i];<br>    &#125;<br>    L.length--;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="Get-LocateElem-L-e"><a href="#Get-LocateElem-L-e" class="headerlink" title="Get/LocateElem(L,e)"></a>Get/LocateElem(L,e)</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/***** 按位查找 ******/</span>  	<br><span class="hljs-function">ElemType <span class="hljs-title">GetElem</span><span class="hljs-params">(SqList L, <span class="hljs-keyword">int</span> i)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> L.data[i - <span class="hljs-number">1</span>];<br>&#125;<br><span class="hljs-comment">/***** 按值查找 ******/</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">LocateElem</span><span class="hljs-params">(SqList L, <span class="hljs-keyword">int</span> e)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; L.length; i++) &#123;<br>        <span class="hljs-keyword">if</span> (L.data[i]==e)<br>        &#123;<br>            <span class="hljs-keyword">return</span> i + <span class="hljs-number">1</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>结构体ElemType不能直接比较大小，要比较结构体内元素的大小，当然在c++中可以用重载。</p>
+</blockquote>
+<h2 id="🌿单链表"><a href="#🌿单链表" class="headerlink" title="🌿单链表"></a>🌿单链表</h2><h3 id="🎈定义-2"><a href="#🎈定义-2" class="headerlink" title="🎈定义"></a>🎈定义</h3><p><img src=".\4.png" srcset="/img/loading.gif" alt=""></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/***** 定义 ******/</span><br><span class="hljs-comment">//两种表示方法</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">LNode</span> &#123;</span><br>    ElemType data;       <span class="hljs-comment">//数据域</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">LNode</span>* <span class="hljs-title">next</span>;</span>  <span class="hljs-comment">//指针域</span><br>&#125;;<br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">LNode</span> <span class="hljs-title">LNode</span>;</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">LNode</span> *<span class="hljs-title">LinkList</span>;</span><br><br><span class="hljs-comment">//书上的方式二，更为简洁</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">LNode</span> &#123;</span><br>    ElemType data;       <span class="hljs-comment">//数据域</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">LNode</span>* <span class="hljs-title">next</span>;</span>  <span class="hljs-comment">//指针域</span><br>&#125;LNode, * LinkList;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//为什么要定义两个结点指针</span><br><span class="hljs-comment">//强调可读性，一个表示这个是结点的指针，一个表示是List</span><br>LNode* L;<br>LinkList L;<br></code></pre></td></tr></table></figure>
+<h4 id="不带头结点的单链表"><a href="#不带头结点的单链表" class="headerlink" title="不带头结点的单链表"></a>不带头结点的单链表</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//不带头结点</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">InitList</span><span class="hljs-params">(LinkList&amp; L)</span> </span>&#123;<br>    <span class="hljs-comment">//指针置空</span><br>    L = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Empty</span><span class="hljs-params">(LinkList L)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span>(L == <span class="hljs-literal">NULL</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="带头结点"><a href="#带头结点" class="headerlink" title="带头结点"></a>带头结点</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//带头结点</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">InitList</span><span class="hljs-params">(LinkList&amp; L)</span> </span>&#123;<br>    L = (LNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(LNode));<br>    <span class="hljs-keyword">if</span> (L==<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    L-&gt;next == <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="🎉单链表上的基本操作"><a href="#🎉单链表上的基本操作" class="headerlink" title="🎉单链表上的基本操作"></a>🎉单链表上的基本操作</h3><h4 id="指定位插入结点"><a href="#指定位插入结点" class="headerlink" title="指定位插入结点"></a>指定位插入结点</h4><p><img src=".\5.png" srcset="/img/loading.gif" alt="带头结点的链表"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">ListInsert</span><span class="hljs-params">(LinkList&amp; L, <span class="hljs-keyword">int</span> i, ElemType e)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">/** 找到第i-1个结点 LNode *p=GetElem(L,i-1) **/</span><br>    <span class="hljs-keyword">if</span> (i&lt;<span class="hljs-number">1</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    LNode* p=L;<br>    <span class="hljs-comment">//使p指向i-1个结点</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j&lt;i<span class="hljs-number">-1</span> &amp;&amp; p!=<span class="hljs-literal">NULL</span>; j++)<br>    &#123;<br>        p = p-&gt;next;<br>    &#125;<br>    <span class="hljs-comment">/** 在p后面插入新元素 return InsertNextNode(p,e)**/</span><br>    <span class="hljs-keyword">if</span> (p==<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    LNode* node = (LNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(LNode));<br>    node-&gt;data = e;<br>    node-&gt;next = p-&gt;next;<br>    p-&gt;next = node;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src=".\6.png" srcset="/img/loading.gif" alt="不带头结点的链表在表首的插入"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">ListInsert</span><span class="hljs-params">(LinkList&amp; L, <span class="hljs-keyword">int</span> i, ElemType e)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">1</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-comment">//在表首部插入</span><br>    <span class="hljs-keyword">if</span> (i == <span class="hljs-number">1</span>)<br>    &#123;<br>        LNode* node = (LNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(LNode));<br>        node-&gt;data = e;<br>        node-&gt;next = L;<br>        L = node;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    LNode* p = L;<br>    <span class="hljs-comment">//使得p指向i-1个结点</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; i - <span class="hljs-number">1</span> &amp;&amp; p != <span class="hljs-literal">NULL</span>; j++)<br>    &#123;<br>        p = p-&gt;next;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (p == <span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    LNode* node = (LNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(LNode));<br>    node-&gt;data = e;<br>    node-&gt;next = p-&gt;next;<br>    p-&gt;next = node;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="后插元素"><a href="#后插元素" class="headerlink" title="后插元素"></a>后插元素</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">InsertNextNode</span><span class="hljs-params">(LNode* p, ElemType e)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//</span><br>    <span class="hljs-keyword">if</span> (p==<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    LNode* node = (LNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(LNode));<br>    <span class="hljs-comment">//内存满了分配不成功</span><br>    <span class="hljs-keyword">if</span> (node==<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    node-&gt;data = e;<br>    node-&gt;next = p-&gt;next;<br>    p-&gt;next = node;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="前插元素"><a href="#前插元素" class="headerlink" title="前插元素"></a>前插元素</h4><p><img src=".\7.png" srcset="/img/loading.gif" alt="数据交换"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">InsertPriorNode</span><span class="hljs-params">(LNode* p, ElemType e)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (p==<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    LNode* node = (LNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(LNode));<br>    <span class="hljs-comment">//连接链表</span><br>    node-&gt;next = p-&gt;next;<br>    p-&gt;next = node;<br>    <span class="hljs-comment">//交换数据</span><br>    node-&gt;data = p-&gt;data;<br>    p-&gt;data = e;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="删除指定位"><a href="#删除指定位" class="headerlink" title="删除指定位"></a>删除指定位</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">ListDelete</span><span class="hljs-params">(LinkList&amp; L, <span class="hljs-keyword">int</span> i, ElemType&amp; e)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (i&lt;<span class="hljs-number">1</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    LNode* p = L;<br>    <span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j&lt;i<span class="hljs-number">-1</span> &amp;&amp; p!=<span class="hljs-literal">NULL</span>; j++)<br>    &#123;<br>        p = p-&gt;next;<br>    &#125;<br>    <span class="hljs-comment">//i值不合法，和i-1后面已经没有结点</span><br>    <span class="hljs-keyword">if</span> (p==<span class="hljs-literal">NULL</span> || p-&gt;next==<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-comment">//保持q结点以用于释放内存（q为被删除结点）</span><br>    LNode* q = p-&gt;next;<br>    e = q-&gt;data;<br>    p-&gt;next = q-&gt;next;<br>    <span class="hljs-built_in">free</span>(q);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="删除指定结点"><a href="#删除指定结点" class="headerlink" title="删除指定结点"></a>删除指定结点</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">DeleteNode</span><span class="hljs-params">(LNode* p)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (p == <span class="hljs-literal">NULL</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <br>    LNode* q = p-&gt;next;<br>    p-&gt;data = p-&gt;next-&gt;data;<br>    p-&gt;next = q-&gt;next;<br>    <span class="hljs-built_in">free</span>(q);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src=".\8.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src=".\9.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src=".\9.5.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src=".\10.png" srcset="/img/loading.gif" alt="小bug，末尾是null必须从头结点开始扫"></p>
+<h4 id="按位查找"><a href="#按位查找" class="headerlink" title="按位查找"></a>按位查找</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">LNode* <span class="hljs-title">GetElem</span><span class="hljs-params">(LinkList L, <span class="hljs-keyword">int</span> i)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (i&lt;<span class="hljs-number">0</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-comment">//头结点是第0个结点</span><br>    LNode* p=L;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt;i &amp;&amp; p!=<span class="hljs-literal">NULL</span>; j++)<br>    &#123;<br>        p = p-&gt;next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> p;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="按值查找"><a href="#按值查找" class="headerlink" title="按值查找"></a><strong>按值查找</strong></h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">LNode* <span class="hljs-title">LocateElem</span><span class="hljs-params">(LinkList L, ELemType e)</span></span><br><span class="hljs-function"></span>&#123;<br>    LNode* p = L-&gt;next;<br>    <span class="hljs-keyword">while</span> (p!=<span class="hljs-literal">NULL</span> || p-&gt;data!=e)<br>    &#123;<br>        p = p-&gt;next;<br>    &#125;<br>    <span class="hljs-comment">//找到后返回p，否则返回NULL</span><br>    <span class="hljs-keyword">return</span> p;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="求表长"><a href="#求表长" class="headerlink" title="求表长"></a>求表长</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Length</span><span class="hljs-params">(LinkList L)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> len = <span class="hljs-number">0</span>;<br>    LNode* p = L;<br>    <span class="hljs-keyword">while</span> (p-&gt;next!=<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        p = p-&gt;next;<br>        len++;<br>    &#125;<br>    <span class="hljs-keyword">return</span> len;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="🌹单链表的创立"><a href="#🌹单链表的创立" class="headerlink" title="🌹单链表的创立"></a>🌹单链表的创立</h3><h4 id="尾插法"><a href="#尾插法" class="headerlink" title="尾插法"></a>尾插法</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">LinkList <span class="hljs-title">List_TailInsert</span><span class="hljs-params">(LinkList&amp; L)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> x;<br>    L = (LinkList)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(LNode));<br>    LNode* s, * r = L;<br>    scanf_s(<span class="hljs-string">&quot;%d&quot;</span>, &amp;x);<br>    <span class="hljs-keyword">while</span> (x!=<span class="hljs-number">9999</span>)<br>    &#123;<br>        s = (LNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(LNode));<br>        s-&gt;data = x;<br>        r-&gt;next = s;<br>        r = s;<br>        scanf_s(<span class="hljs-string">&quot;%d&quot;</span>, &amp;x);<br>    &#125;<br>    r-&gt;next = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">return</span> L;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="头插法（链表逆置）"><a href="#头插法（链表逆置）" class="headerlink" title="头插法（链表逆置）"></a>头插法（链表逆置）</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">LinkList <span class="hljs-title">List_HeadInsert</span><span class="hljs-params">(LinkList&amp; L)</span></span><br><span class="hljs-function"></span>&#123;<br>    LNode* s;<br>    <span class="hljs-keyword">int</span> x;<br>    L = (LinkList)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(LNode));<br>    L-&gt;next = <span class="hljs-literal">NULL</span>;<br>    scanf_s(<span class="hljs-string">&quot;%d&quot;</span>, &amp;x);<br>    <span class="hljs-keyword">while</span> (x != <span class="hljs-number">9999</span>)<br>    &#123;<br>        s = (LNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(LNode));<br>        s-&gt;data = x;<br>        s-&gt;next = L-&gt;next;<br>        L-&gt;next = s;<br>        scanf_s(<span class="hljs-string">&quot;%d&quot;</span>, &amp;x);<br>    &#125;<br>    <span class="hljs-keyword">return</span> L;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src=".\11.png" srcset="/img/loading.gif" alt="没有L-&gt;next = NULL"></p>
+<ul>
+<li>扫描链表用其元素头插塞到新链表之中</li>
+<li>从末尾取结点，重新头插回结点之中</li>
+</ul>
+<h2 id="🌿双向链表"><a href="#🌿双向链表" class="headerlink" title="🌿双向链表"></a>🌿双向链表</h2><h3 id="🎈定义-3"><a href="#🎈定义-3" class="headerlink" title="🎈定义"></a>🎈定义</h3><p><img src=".\12.png" srcset="/img/loading.gif" alt="image-20210130205954514"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DNode</span>&#123;</span><br>    ElemType data;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DNode</span>* <span class="hljs-title">prior</span>, * <span class="hljs-title">next</span>;</span><br>&#125;DNode,*DLinkList;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">InitDLinkList</span><span class="hljs-params">(DLinkList&amp; L)</span></span><br><span class="hljs-function"></span>&#123;<br>    L = (DNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(DNode));<br>    L-&gt;prior = <span class="hljs-literal">NULL</span>;<br>    L-&gt;next = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Empty</span><span class="hljs-params">(DLinkList L)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> (L-&gt;next);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="🎉基本操作"><a href="#🎉基本操作" class="headerlink" title="🎉基本操作"></a>🎉基本操作</h3><h4 id="插入结点"><a href="#插入结点" class="headerlink" title="插入结点"></a>插入结点</h4><p><img src=".\13.png" srcset="/img/loading.gif" alt=""><br><img src=".\14.png" srcset="/img/loading.gif" alt=""></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//插入结点</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">InsertNextDNode</span><span class="hljs-params">(DNode* p, DNode* s)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (p==<span class="hljs-literal">NULL</span>||s==<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    s-&gt;next = p-&gt;next;<br>    <span class="hljs-keyword">if</span> (s-&gt;next!=<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        s-&gt;next-&gt;prior = s;<br>    &#125;<br>    s-&gt;prior = p;<br>    p-&gt;next = s;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h4><ul>
+<li><strong>在结点p前插入一个结点</strong>：只需要p-&gt;prior找到它的前驱结点，然后再执行后插操作</li>
+<li><strong>位序i前插入</strong>，从头结点开始找到i-1号结点，对结点实行后插操作。</li>
+</ul>
+<h4 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h4><p><img src=".\15.png" srcset="/img/loading.gif" alt="image-20210130212311442"></p>
+<p><img src=".\16.png" srcset="/img/loading.gif" alt="image-20210130213610334"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//删除q的后继结点</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">DeleteNextDNode</span><span class="hljs-params">(DNode* p)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (p==<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    DNode* q = p-&gt;next;<br>    <span class="hljs-keyword">if</span> (q==<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    p-&gt;next = q-&gt;next;<br>    <span class="hljs-keyword">if</span> (p-&gt;next!=<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        q-&gt;next-&gt;prior = p;<br>    &#125;<br>    <span class="hljs-built_in">free</span>(q);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;    <br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DestoryList</span><span class="hljs-params">(DLinkList&amp; L)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">while</span> (L-&gt;next != <span class="hljs-literal">NULL</span>)<br>    &#123;<br>        DeleteNextDNode(L);<br>    &#125;<br>    <span class="hljs-built_in">free</span>(L);<br>    L = <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src=".\17.png" srcset="/img/loading.gif" alt="遍历"></p>
+<h2 id="🌿循环链表"><a href="#🌿循环链表" class="headerlink" title="🌿循环链表"></a>🌿循环链表</h2><h3 id="循环单链表"><a href="#循环单链表" class="headerlink" title="循环单链表"></a>循环单链表</h3><p><img src=".\18.png" srcset="/img/loading.gif" alt=""></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//链表初始化</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">InitDLinkList</span><span class="hljs-params">(LinkList&amp; L)</span></span><br><span class="hljs-function"></span>&#123;<br>    L = (LNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(LNode));<br>    L-&gt;next = L;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isTail</span><span class="hljs-params">(LinkList L, LNode* p)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> (p-&gt;next==L)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src=".\19.png" srcset="/img/loading.gif" alt="循环遍历"></p>
+<h3 id="循环双链表"><a href="#循环双链表" class="headerlink" title="循环双链表"></a>循环双链表</h3><p><img src=".\20.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src=".\21.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src=".\22.png" srcset="/img/loading.gif" alt=""></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//后面插入结点</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">InsertNextDNode</span><span class="hljs-params">(DNode* p, DNode* s)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (p==<span class="hljs-literal">NULL</span>||s==<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    s-&gt;next = p-&gt;next;<br>        s-&gt;next-&gt;prior = s;<span class="hljs-comment">//这句和非循环链表不一样</span><br>    s-&gt;prior = p;<br>    p-&gt;next = s;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">//后面删除结点</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">DeleteNextDNode</span><span class="hljs-params">(DNode* p)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (p==<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    DNode* q = p-&gt;next;<br>    p-&gt;next = q-&gt;next;<br>    q-&gt;next-&gt;prior = p;  <span class="hljs-comment">//这句不一样</span><br>    <span class="hljs-built_in">free</span>(q);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;    <br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="🌿静态链表"><a href="#🌿静态链表" class="headerlink" title="🌿静态链表"></a>🌿静态链表</h2><p><img src=".\23.png" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>初始化： a[0]设为-1 ，其他结点设置一个特殊值表示空闲如-2</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>    ElemType data;<br>    <span class="hljs-keyword">int</span> next;<br>&#125;SLinkList[MaxSize];<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>&#123;</span><br>    ElemType data;<br>    <span class="hljs-keyword">int</span> next;<br>&#125;;<br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> <span class="hljs-title">SLinkList</span>[<span class="hljs-title">MaxSize</span>]</span><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>应用：操作系统文件分配表FAT</p>
+</blockquote>
+<h2 id="🌿顺序表和链表的比较"><a href="#🌿顺序表和链表的比较" class="headerlink" title="🌿顺序表和链表的比较"></a>🌿顺序表和链表的比较</h2><p><img src=".\24.png" srcset="/img/loading.gif" alt="创建"></p>
+<p><img src=".\25.png" srcset="/img/loading.gif" alt="销毁"></p>
+<p><img src=".\26.png" srcset="/img/loading.gif" alt="插入删除"></p>
+<p><img src=".\27.png" srcset="/img/loading.gif" alt="查找"></p>
+<h2 id="🦊思维导图"><a href="#🦊思维导图" class="headerlink" title="🦊思维导图"></a>🦊思维导图</h2><p><img src=".\-1.jpg" srcset="/img/loading.gif" alt=""></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%80%83%E7%A0%94-%E7%8E%8B%E9%81%93/">-考研 -王道</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/27/GoF-%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">GoF_对象创建模式</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '4c1cc64f58db04df20d1',
+          clientSecret: '60df911ad9c5263324a2797ea783b31c4f05eb92',
+          repo: 'gitalk-comment',
+          owner: 'qingcai56',
+          admin: ["qingcai56"],
+          id: '4d861dbdc9e65a63df4b7d6647858ee3',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200&display=swap" rel="stylesheet">
+        </div>
+      </div>
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
