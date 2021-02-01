@@ -1,0 +1,614 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shuye.png">
+  <link rel="icon" type="image/png" href="/img/shuye.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="learning">
+  <meta name="author" content="qingcai56">
+  <meta name="keywords" content="">
+  <title>侯捷_ObjectBased - qingcai56&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>八百物屋</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/astronaut.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="侯捷_ObjectBased">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-01 21:00" pubdate>
+        February 1, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">侯捷_ObjectBased</h1>
+            
+            <div class="markdown-body">
+              <h2 id="🌿知识"><a href="#🌿知识" class="headerlink" title="🌿知识"></a>🌿知识</h2><h3 id="两种class"><a href="#两种class" class="headerlink" title="两种class"></a>两种class</h3><ul>
+<li><strong>Object Based</strong> : 面對的是單一 class 的設計</li>
+<li><strong>Object Oriented</strong> : 面對的是多重 classes 的設計， classes 和 classes之間的關係。</li>
+</ul>
+<h3 id="Object-Based经典两类"><a href="#Object-Based经典两类" class="headerlink" title="Object Based经典两类"></a>Object Based经典两类</h3><ul>
+<li>Class <strong>without pointer</strong> member(s)：complex</li>
+<li>Class <strong>with pointer</strong> member(s) ：string</li>
+</ul>
+<blockquote>
+<p>带指针和不带指针的区别是new和delete的时候情况有所不同</p>
+</blockquote>
+<p><img src=".\1.png" srcset="/img/loading.gif" alt="cpp项目基本结构"></p>
+<h3 id="头文件防卫式声明"><a href="#头文件防卫式声明" class="headerlink" title="头文件防卫式声明"></a>头文件防卫式声明</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//防止头文件被多次引用</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> __COMPLEX__</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> __COMPLEX__</span><br>	<span class="hljs-comment">//...</span><br>	<span class="hljs-comment">//...</span><br>	<span class="hljs-comment">//...</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br><br><span class="hljs-comment">//pragma👇在老的编译器中可能不支持</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span><br></code></pre></td></tr></table></figure>
+<h3 id="类的权限"><a href="#类的权限" class="headerlink" title="类的权限"></a>类的权限</h3><p><img src=".\2.jpg" srcset="/img/loading.gif" alt=""></p>
+<h2 id="🌿Complex"><a href="#🌿Complex" class="headerlink" title="🌿Complex"></a>🌿Complex</h2><h3 id="h文件布局"><a href="#h文件布局" class="headerlink" title="h文件布局"></a>h文件布局</h3><p><img src=".\3.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="h文件源码"><a href="#h文件源码" class="headerlink" title="h文件源码"></a>h文件源码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> __COMPLEX__</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> __COMPLEX__</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;iostream.h&quot;</span></span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">complex</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">complex</span>(<span class="hljs-keyword">double</span> r = <span class="hljs-number">0</span>, <span class="hljs-keyword">double</span> i = <span class="hljs-number">0</span>)<br>		: re(r), im(i)<br>	&#123; &#125;;<br>	<span class="hljs-built_in">complex</span>&amp; <span class="hljs-keyword">operator</span> +=(<span class="hljs-keyword">const</span> <span class="hljs-built_in">complex</span>&amp;);<br>    <span class="hljs-comment">//👇这个定义在类中的重载调用 classname&lt;&lt;cout,不符合习惯</span><br>	ostream&amp; <span class="hljs-keyword">operator</span> &lt;&lt;(ostream&amp; os)<br>	&#123;<br>		<span class="hljs-keyword">return</span> os &lt;&lt; <span class="hljs-string">&#x27;(&#x27;</span> &lt;&lt; <span class="hljs-keyword">this</span>-&gt;real() &lt;&lt; <span class="hljs-string">&#x27;,&#x27;</span> &lt;&lt; <span class="hljs-keyword">this</span>-&gt;imag() &lt;&lt; <span class="hljs-string">&#x27;)&#x27;</span>;<br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">real</span><span class="hljs-params">()</span><span class="hljs-keyword">const</span> </span>&#123; <span class="hljs-keyword">return</span> re; &#125;<br>	<span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">imag</span><span class="hljs-params">()</span><span class="hljs-keyword">const</span> </span>&#123; <span class="hljs-keyword">return</span> im; &#125;<br>	~<span class="hljs-built_in">complex</span>() &#123;&#125;<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-keyword">double</span> re, im;<br><br>	<span class="hljs-keyword">friend</span> <span class="hljs-built_in">complex</span>&amp; __doapl(<span class="hljs-built_in">complex</span>*, <span class="hljs-keyword">const</span> <span class="hljs-built_in">complex</span>&amp;);<br>	<span class="hljs-keyword">friend</span> ostream&amp; <span class="hljs-keyword">operator</span> &lt;&lt;(ostream&amp; os, <span class="hljs-keyword">const</span> <span class="hljs-built_in">complex</span>&amp; x);<br>&#125;;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> <span class="hljs-comment">// ! __Complex__</span></span><br></code></pre></td></tr></table></figure>
+<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li><p>在类中声明的函数都是inline函数（编译时直接代码替换，不调用函数，不过对于代码量太大的函数也可能忽略inline关键字，！！inline和constexpr必须放在头文件中）</p>
+</li>
+<li><p>类内函数默认传入this指针形参（this指向类自身）</p>
+</li>
+<li><p>构造函数用参数化列表性能要远高于=赋值</p>
+</li>
+<li><p>形参是&amp;引用<strong>是否加const（修改？）</strong>？</p>
+</li>
+<li><p>什么时候<code>return by refrence</code>？什么时候<code>return by value</code>？</p>
+</li>
+<li><p>对于不修改类的数据的函数，<strong>一律在括号后面加const</strong>,将this指针从 <code>int *const不让修改指针指向</code>转化成 <code>const int *const类型即不让修改指针指向，也不让修改指针所指向的数据</code></p>
+</li>
+<li><p>friend可以自由获取该类的private，<code>相同类的对象互为友元</code></p>
+</li>
+</ul>
+<h3 id="cpp文件-源码"><a href="#cpp文件-源码" class="headerlink" title="cpp文件 源码"></a>cpp文件 源码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;Complex.h&quot;</span></span><br><span class="hljs-comment">//复数可以加实数，实数也可以加复数，如果定义在类中就会受限</span><br><span class="hljs-keyword">inline</span> <span class="hljs-built_in">complex</span> <span class="hljs-keyword">operator</span> + (<span class="hljs-keyword">const</span> <span class="hljs-built_in">complex</span>&amp; x, <span class="hljs-keyword">const</span> <span class="hljs-built_in">complex</span>&amp; y)<br>&#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">complex</span>(x.real() + y.real(), x.imag() + y.imag());<br>&#125;<br><br><span class="hljs-keyword">inline</span> <span class="hljs-built_in">complex</span> <span class="hljs-keyword">operator</span> + (<span class="hljs-keyword">const</span> <span class="hljs-built_in">complex</span>&amp; x, <span class="hljs-keyword">int</span> y)<br>&#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">complex</span>(x.real() + y, x.imag());<br>&#125;<br><br><span class="hljs-keyword">inline</span> <span class="hljs-built_in">complex</span> <span class="hljs-keyword">operator</span> + (<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">const</span> <span class="hljs-built_in">complex</span>&amp; y)<br>&#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">complex</span>(x + y.real(), y.imag());<br>&#125;<br><br><span class="hljs-comment">//两个复数类相加</span><br><span class="hljs-keyword">inline</span> <span class="hljs-built_in">complex</span>&amp; __doapl(<span class="hljs-built_in">complex</span>* ths, <span class="hljs-keyword">const</span> <span class="hljs-built_in">complex</span>&amp; r)<br>&#123;<br>	ths-&gt;re += r.re;<br>	ths-&gt;im += r.im;<br>	<span class="hljs-keyword">return</span> *ths;<br>&#125;<br><br><span class="hljs-keyword">inline</span> <span class="hljs-built_in">complex</span>&amp; <span class="hljs-built_in">complex</span>::<span class="hljs-keyword">operator</span> += (<span class="hljs-keyword">const</span> <span class="hljs-built_in">complex</span>&amp; r)<br>&#123;<br>	<span class="hljs-keyword">return</span> __doapl(<span class="hljs-keyword">this</span>, r);<br>&#125;<br><br><span class="hljs-comment">//操作符重载,可以连续调用 cout&lt;&lt;c1&lt;&lt;endl，所以返回值不能为void</span><br>ostream&amp; <span class="hljs-keyword">operator</span> &lt;&lt;(ostream&amp; os, <span class="hljs-keyword">const</span> <span class="hljs-built_in">complex</span>&amp; x)<br>&#123;<br>	<span class="hljs-keyword">return</span> os &lt;&lt; <span class="hljs-string">&#x27;(&#x27;</span> &lt;&lt; x.real() &lt;&lt; <span class="hljs-string">&#x27;,&#x27;</span> &lt;&lt; x.imag() &lt;&lt; <span class="hljs-string">&#x27;)&#x27;</span>;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+<h2 id="🌿-String"><a href="#🌿-String" class="headerlink" title="🌿 String"></a>🌿 String</h2><h3 id="h文件源码-1"><a href="#h文件源码-1" class="headerlink" title="h文件源码"></a>h文件源码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> __String__</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> __String__</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&quot;iostream.h&quot;</span></span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">String</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>	String(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* cstr);<br>	String(<span class="hljs-keyword">const</span> String&amp; str);<br>	String&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-keyword">const</span> String&amp; str);<br>	~String();<br>	<span class="hljs-comment">//是否改动数据？__:加const </span><br>	<span class="hljs-comment">//隐式this指针:string *const </span><br>	<span class="hljs-function"><span class="hljs-keyword">char</span>* <span class="hljs-title">get_c_str</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>&#123; <span class="hljs-keyword">return</span> m_data; &#125;<br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-keyword">char</span>* m_data;<br>&#125;;<br><br><span class="hljs-comment">//定义在类中的函数都是内联的，而在类外则需要加入修饰符  </span><br><span class="hljs-comment">//！！inline一定要放在头文件内</span><br><span class="hljs-comment">//因为函数定义成inline，所以就没写cpp文件</span><br><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-title">String::String</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* cstr = <span class="hljs-number">0</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (cstr)<br>	&#123;<br>		m_data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[<span class="hljs-built_in">strlen</span>(cstr) + <span class="hljs-number">1</span>];<br>		strcpy_s(m_data, <span class="hljs-built_in">strlen</span>(cstr) + <span class="hljs-number">1</span>, cstr);<br>	&#125;<br>	<span class="hljs-keyword">else</span><br>	&#123;<br>		m_data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[<span class="hljs-number">1</span>];<br>		*m_data = <span class="hljs-string">&#x27;\0&#x27;</span>;<br>	&#125;<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-title">String::String</span><span class="hljs-params">(<span class="hljs-keyword">const</span> String&amp; str)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">//c语言风格最后有一个&#x27;\0&#x27;,strcpy_s中间参数是缓冲区大小</span><br>	m_data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[<span class="hljs-built_in">strlen</span>(str.m_data) + <span class="hljs-number">1</span>];<br>	strcpy_s(m_data, <span class="hljs-built_in">strlen</span>(str.m_data) + <span class="hljs-number">1</span>, str.m_data);<br>&#125;<br><br><span class="hljs-keyword">inline</span> String::~String()<br>&#123;<br>	<span class="hljs-keyword">delete</span>[] m_data;<br>&#125;<br><br><span class="hljs-comment">//如果函数返回值为void，则不支持连串赋值</span><br><span class="hljs-keyword">inline</span> String&amp; String::<span class="hljs-keyword">operator</span>= (<span class="hljs-keyword">const</span> String&amp; str)<br>&#123;<br>	<span class="hljs-comment">//必须要判断自我复制，因为以后操作是先delete再cpy</span><br>	<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == &amp;str)<br>	&#123;<br>		<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<br>	&#125;<br>	<span class="hljs-keyword">delete</span>[] m_data;<br>	m_data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>(<span class="hljs-built_in">strlen</span>(str.m_data) + <span class="hljs-number">1</span>);<br>	strcpy_s(m_data, <span class="hljs-built_in">strlen</span>(str.m_data) + <span class="hljs-number">1</span>, str.m_data);<br>	<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<br>&#125;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+<h3 id="带指针类的Big-Three"><a href="#带指针类的Big-Three" class="headerlink" title="带指针类的Big Three"></a>带指针类的Big Three</h3><ul>
+<li><strong>拷贝构造</strong>：String(const String&amp; str)</li>
+<li><strong>拷贝复制</strong>：String&amp; operator=(const String&amp; str)</li>
+<li><strong>析构</strong>：~String()</li>
+</ul>
+<p><img src=".\4.png" srcset="/img/loading.gif" alt="class with pointer member必須有copy ctor和copy p="></p>
+<blockquote>
+<p>深拷贝（数据全部拷贝过去），浅拷贝（两个指针指向同一块内存）</p>
+</blockquote>
+<p><img src=".\5.png" srcset="/img/loading.gif" alt="一定要在operator=中檢查是否self assignment"></p>
+<h3 id="new和delete"><a href="#new和delete" class="headerlink" title="new和delete"></a>new和delete</h3><ul>
+<li>new：先分配 memory, 再調用 ctor</li>
+<li>delete：先調用 dtor, 再釋放 memory</li>
+</ul>
+<p><img src=".\6.png" srcset="/img/loading.gif" alt="new Complex"></p>
+<p><img src=".\7.png" srcset="/img/loading.gif" alt="delete complex"></p>
+<blockquote>
+<p>new（分配内存-&gt;转型-&gt;构造函数）  C语法: Complex <em>pc=(Complex </em>)malloc(sizeof(Complex));  pc-&gt;Comlex::Complex(1,2)</p>
+<p> delete(析构-&gt;释放内存)</p>
+</blockquote>
+<p><img src=".\8.png" srcset="/img/loading.gif" alt="new String"></p>
+<p><img src=".\9.png" srcset="/img/loading.gif" alt="delete String"></p>
+<h3 id="Stack（栈）和Heap（堆）"><a href="#Stack（栈）和Heap（堆）" class="headerlink" title="Stack（栈）和Heap（堆）"></a>Stack（栈）和Heap（堆）</h3><ul>
+<li><strong>Stack</strong>：是存在於某作用域 (scope) 的一塊內存空間 (memory space)。例如當你調用函數，函數本身即會形成一個 stack 用來放置它所接收的參數，以及返回地址。 在函數本體 (function body) 內聲明的任何變量， 其所使用的內存塊都取自上述 stack。<strong>stack object其生命在作用域 (scope) 結束之際結束</strong>。</li>
+<li><strong>Heap</strong>：或謂 system heap，是指由操作系統提供的一塊 global 內存空間，程序可動態分配 (dynamic allocated) 從某中獲得若干區塊 (blocks)，<strong>heap object其生命 在它被 deleted 之際結束</strong>，使用<strong>new动态分配的内存一定要delete释放</strong>，否则会出现内存泄漏（memory leak）。</li>
+</ul>
+<h3 id="VC动态分配内存块"><a href="#VC动态分配内存块" class="headerlink" title="VC动态分配内存块"></a>VC动态分配内存块</h3><p><img src=".\10.png" srcset="/img/loading.gif" alt="内存分配，再debug和release模式下"></p>
+<blockquote>
+<p>注意区分 代码区和数据区，object的函数全部放在类共用代码区，所以分配内存块只分配数据的内存。VC编译器分配内存的习惯是16字节对齐</p>
+</blockquote>
+<p><img src=".\11.png" srcset="/img/loading.gif" alt="数组对象的内存分配"></p>
+<h3 id="array-new搭配array-delete"><a href="#array-new搭配array-delete" class="headerlink" title="array new搭配array delete"></a>array new搭配array delete</h3><p><img src=".\12.png" srcset="/img/loading.gif" alt=""></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/C/">C++</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BE%AF%E6%8D%B7-%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91/">-侯捷 -面对对象的高级开发</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/30/%E7%8E%8B%E9%81%93%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%BA%BF%E6%80%A7%E8%A1%A8/">
+                        <span class="hidden-mobile">王道数据结构_第二章线性表</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '4c1cc64f58db04df20d1',
+          clientSecret: '60df911ad9c5263324a2797ea783b31c4f05eb92',
+          repo: 'gitalk-comment',
+          owner: 'qingcai56',
+          admin: ["qingcai56"],
+          id: '52cbff2f6985d70ec2d401656d680dbb',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200&display=swap" rel="stylesheet">
+        </div>
+      </div>
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
