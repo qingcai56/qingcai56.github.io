@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.5k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18
+      21
        分钟
     </span>
   
@@ -228,7 +228,7 @@
             
             <div class="markdown-body">
               <h2 id="🌿知识"><a href="#🌿知识" class="headerlink" title="🌿知识"></a>🌿知识</h2><h3 id="两种class"><a href="#两种class" class="headerlink" title="两种class"></a>两种class</h3><ul>
-<li><strong>Object Based</strong> : 面對的是單一 class 的設計</li>
+<li><strong>Object Based</strong> : 面對的是單一 class 的設計。</li>
 <li><strong>Object Oriented</strong> : 面對的是多重 classes 的設計， classes 和 classes之間的關係。</li>
 </ul>
 <h3 id="Object-Based经典两类"><a href="#Object-Based经典两类" class="headerlink" title="Object Based经典两类"></a>Object Based经典两类</h3><ul>
@@ -287,12 +287,23 @@
 <li><strong>Stack</strong>：是存在於某作用域 (scope) 的一塊內存空間 (memory space)。例如當你調用函數，函數本身即會形成一個 stack 用來放置它所接收的參數，以及返回地址。 在函數本體 (function body) 內聲明的任何變量， 其所使用的內存塊都取自上述 stack。<strong>stack object其生命在作用域 (scope) 結束之際結束</strong>。</li>
 <li><strong>Heap</strong>：或謂 system heap，是指由操作系統提供的一塊 global 內存空間，程序可動態分配 (dynamic allocated) 從某中獲得若干區塊 (blocks)，<strong>heap object其生命 在它被 deleted 之際結束</strong>，使用<strong>new动态分配的内存一定要delete释放</strong>，否则会出现内存泄漏（memory leak）。</li>
 </ul>
-<h3 id="VC动态分配内存块"><a href="#VC动态分配内存块" class="headerlink" title="VC动态分配内存块"></a>VC动态分配内存块</h3><p><img src=".\10.png" srcset="/img/loading.gif" alt="内存分配，再debug和release模式下"></p>
+<h3 id="VC动态分配内存块（了解）"><a href="#VC动态分配内存块（了解）" class="headerlink" title="VC动态分配内存块（了解）"></a>VC动态分配内存块（了解）</h3><p><img src=".\10.png" srcset="/img/loading.gif" alt="内存分配，再debug和release模式下"></p>
 <blockquote>
 <p>注意区分 代码区和数据区，object的函数全部放在类共用代码区，所以分配内存块只分配数据的内存。VC编译器分配内存的习惯是16字节对齐</p>
 </blockquote>
 <p><img src=".\11.png" srcset="/img/loading.gif" alt="数组对象的内存分配"></p>
 <h3 id="array-new搭配array-delete"><a href="#array-new搭配array-delete" class="headerlink" title="array new搭配array delete"></a>array new搭配array delete</h3><p><img src=".\12.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="🌿补充"><a href="#🌿补充" class="headerlink" title="🌿补充"></a>🌿补充</h2><h3 id="关键字static"><a href="#关键字static" class="headerlink" title="关键字static"></a>关键字static</h3><p>static全局变量只能在本文件中使用，不能被extern其他文件，</p>
+<p>静态成员函数没有this point只能去处理静态data</p>
+<p><img src=".\13.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="例子（银行利率）"><a href="#例子（银行利率）" class="headerlink" title="例子（银行利率）"></a>例子（银行利率）</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Account</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> m_rate;<br>	<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set_rate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">double</span>&amp; x)</span> </span>&#123; m_rate = x; &#125;<br>&#125;;<br><span class="hljs-keyword">double</span> Account::m_rate = <span class="hljs-number">8.0</span>;<br><br><span class="hljs-comment">//调用static函数的两种方式</span><br><span class="hljs-comment">//1.通过object调用</span><br><span class="hljs-comment">//2.通过class name 调用</span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	Account::set_rate(<span class="hljs-number">9.0</span>);<br>	<span class="hljs-built_in">cout</span> &lt;&lt; Account::m_rate;<br>	Account a;<br>	a.set_rate(<span class="hljs-number">8.5</span>);<br>	<span class="hljs-built_in">cout</span> &lt;&lt; a.m_rate;<br>	a.m_rate = <span class="hljs-number">4.0</span>;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; a.m_rate;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="单例模式-Singleton"><a href="#单例模式-Singleton" class="headerlink" title="单例模式 Singleton"></a>单例模式 Singleton</h4><p><img src=".\14.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="模板template"><a href="#模板template" class="headerlink" title="模板template"></a>模板template</h3><p><img src=".\15.png" srcset="/img/loading.gif" alt="类模板"></p>
+<p><img src=".\16.png" srcset="/img/loading.gif" alt="函数模板"></p>
+<ul>
+<li>Class 自定义类</li>
+<li>typename 使用内置类型</li>
+</ul>
 
             </div>
             <hr>
@@ -322,6 +333,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/02/03/%E4%BE%AF%E6%8D%B7-OOP%E4%B8%8E%E8%99%9A%E5%87%BD%E6%95%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">侯捷_OOP与虚函数</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
