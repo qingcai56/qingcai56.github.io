@@ -17,7 +17,7 @@
   <meta name="description" content="learning">
   <meta name="author" content="qingcai56">
   <meta name="keywords" content="">
-  <title>侯捷_OOP与虚函数 - qingcai56&#39;s blog</title>
+  <title>RB-Tree - qingcai56&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="侯捷_OOP与虚函数">
+            <span class="h2" id="subtitle" title="RB-Tree">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-03 12:14" pubdate>
-        February 3, 2021 pm
+      <time datetime="2021-02-12 17:42" pubdate>
+        February 12, 2021 pm
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      201 字
+      544 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      5
        分钟
     </span>
   
@@ -224,28 +224,44 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">侯捷_OOP与虚函数</h1>
+            <h1 style="display: none">RB-Tree</h1>
             
             <div class="markdown-body">
-              <h2 id="🌿Composition-複合-has-a"><a href="#🌿Composition-複合-has-a" class="headerlink" title="🌿Composition (複合 has a)"></a>🌿Composition (複合 has a)</h2><p><img src=".\1.png" srcset="/img/loading.gif" alt=""></p>
-<p><img src=".\2.png" srcset="/img/loading.gif" alt=""></p>
-<p><img src=".\3.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="🌿Delegation-委託"><a href="#🌿Delegation-委託" class="headerlink" title="🌿Delegation (委託)"></a>🌿Delegation (委託)</h2><blockquote>
-<p>Composition by reference</p>
+              <h2 id="🌿性质"><a href="#🌿性质" class="headerlink" title="🌿性质"></a>🌿性质</h2><p>红黑树是一种<strong>自平衡二叉搜索树</strong>，它可以在<strong>O(log<sub>n</sub>)</strong>时间内完成查找、插入和删除，这里的<strong>n</strong>是树中元素的数目，它具有以下特点：</p>
+<ol>
+<li>节点是红色或黑色。</li>
+<li><strong>根是黑色</strong>。</li>
+<li>所有<strong>叶子都是黑色</strong>（叶子是NIL节点）。</li>
+<li><strong>每个红色节点必须有两个黑色的子节点</strong>。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）</li>
+<li>从任一节点到其每个叶子的所有<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/道路_(图论">简单路径</a>)都包含<strong>相同数目的黑色节点</strong>。</li>
+</ol>
+<p><img src=".\1.png" srcset="/img/loading.gif" alt="null结点算作黑色结点"></p>
+<p>这些约束确保了红黑树的关键特性：<strong>从根到叶子的最长的可能路径不多于最短的可能路径的两倍长</strong>，使得这棵树大抵是平衡的，比AVL树条件宽松。</p>
+<h2 id="🌿插入和旋转"><a href="#🌿插入和旋转" class="headerlink" title="🌿插入和旋转"></a>🌿插入和旋转</h2><p>📺<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Pp4y1D7u1/?spm_id_from=333.788.videocard.1">红黑树</a>    16:30开始插入演示👇</p>
+<p><img src=".\1.5.png" srcset="/img/loading.gif" alt="选择表格，比AVL选择复杂一些"></p>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91#%E6%8F%92%E5%85%A5">🔗维基插入锚点</a></p>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91#%E5%88%A0%E9%99%A4">🔗维基删除锚点</a></p>
+<h2 id="🌿各种balance树"><a href="#🌿各种balance树" class="headerlink" title="🌿各种balance树"></a>🌿各种balance树</h2><h3 id="🌹AVL树"><a href="#🌹AVL树" class="headerlink" title="🌹AVL树"></a>🌹AVL树</h3><p><strong>高度自平衡二叉树</strong>，<strong>任一节点对应的两棵子树的最大高度差为1</strong>，<strong>查找、插入和删除</strong>在平均和最坏情况下的<strong>时间复杂度</strong>都是<strong>O(log<sub>n</sub>)</strong>增加和删除元素的操作则可能需要借由一次或多次树旋转以实现树的重新平衡。</p>
+<p><img src=".\2.gif" srcset="/img/loading.gif" style="zoom:200%;" /></p>
+<p><img src=".\2.5.png" srcset="/img/loading.gif" alt="avl树旋转的图形描述。"></p>
+<p>🔗<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/AVL%E6%A0%91">艾薇儿树维基</a></p>
+<blockquote>
+<p>AVL树相对于RB树维护平衡的开销（旋转操作）更大，但是查找的速度也相应的更快。</p>
 </blockquote>
-<p><img src=".\4.png" srcset="/img/loading.gif" alt="Pointer to Implementation"></p>
-<h2 id="🌿Inheritance-繼承，is-a"><a href="#🌿Inheritance-繼承，is-a" class="headerlink" title="🌿Inheritance (繼承，is-a)"></a>🌿Inheritance (繼承，is-a)</h2><p><img src=".\5.png" srcset="/img/loading.gif" alt=""></p>
-<p><img src=".\6.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="🌿虚函数-amp-继承（virtual）"><a href="#🌿虚函数-amp-继承（virtual）" class="headerlink" title="🌿虚函数 &amp; 继承（virtual）"></a>🌿虚函数 &amp; 继承（virtual）</h2><p><img src=".\7.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="🌼template-method"><a href="#🌼template-method" class="headerlink" title="🌼template method"></a>🌼template method</h3><p><img src=".\8.png" srcset="/img/loading.gif" alt="例子：打开磁盘文件"></p>
-<p><img src=".\9.png" srcset="/img/loading.gif" alt="继承with虚函数"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CDocument</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OnFileOpen</span><span class="hljs-params">()</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-comment">// 這是個算法，每個 cout 輸出代表一個實際動作</span><br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;dialog...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;check file status...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;open file...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		Serialize();<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;close file...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;update all views...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Serialize</span><span class="hljs-params">()</span> </span>&#123; &#125;;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CMyDoc</span> :</span> <span class="hljs-keyword">public</span> CDocument<br>&#123;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Serialize</span><span class="hljs-params">()</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-comment">// 只有應用程序本身才知道如何讀取自己的文件(格式)</span><br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;CMyDoc::Serialize()&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>	&#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	CMyDoc myDoc; <span class="hljs-comment">// 假設對應[File/Open]</span><br>	myDoc.OnFileOpen();<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="🌿组合"><a href="#🌿组合" class="headerlink" title="🌿组合"></a>🌿组合</h2><h3 id="🌼Inheritance-Composition"><a href="#🌼Inheritance-Composition" class="headerlink" title="🌼Inheritance+Composition"></a>🌼Inheritance+Composition</h3><p><img src=".\10.png" srcset="/img/loading.gif" alt=""></p>
-<p><img src=".\11.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="🌼Delegation-Inheritance"><a href="#🌼Delegation-Inheritance" class="headerlink" title="🌼Delegation + Inheritance"></a>🌼Delegation + Inheritance</h3><h4 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h4><p><img src=".\12.png" srcset="/img/loading.gif" alt="observer"></p>
-<p><img src=".\13.png" srcset="/img/loading.gif" alt="observer应用场景"></p>
-<p><img src=".\14.png" srcset="/img/loading.gif" alt=""></p>
-<h4 id="原型模式🔗（对于复杂对象的创建）"><a href="#原型模式🔗（对于复杂对象的创建）" class="headerlink" title="原型模式🔗（对于复杂对象的创建）"></a><a target="_blank" rel="noopener" href="https://qingcai56.cn/2021/01/27/GoF-%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%BC%8F/#%F0%9F%8C%BFPrototype%EF%BC%88%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%EF%BC%89">原型模式🔗</a>（对于复杂对象的创建）</h4>
+<h3 id="🌹B树"><a href="#🌹B树" class="headerlink" title="🌹B树"></a>🌹B树</h3><p><strong>B树\B-数</strong>（英语：B-tree）是一种自平衡的树，能够保持数据有序。这种数据结构能够让查找数据、顺序访问、插入数据及删除的动作，都在<strong>对数时间</strong>内完成。</p>
+<p><img src=".\3.png" srcset="/img/loading.gif" alt=""></p>
+<p>🔗<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/B%E6%A0%91">b树维基</a></p>
+<h3 id="🌹B-树"><a href="#🌹B-树" class="headerlink" title="🌹B+树"></a>🌹B+树</h3><p>与b树类似，但是自由叶子结点存储value，<strong>非叶子结点只存储key</strong>。并且叶子结点用一条指针相连起来，方便数据的遍历。</p>
+<p><img src=".\5.png" srcset="/img/loading.gif" alt="把键1-7连接到值 d1-d7 的B+树。链表（红色）用于快速顺序遍历叶子节点。树的分叉因子b=4。"></p>
+<p>🔗<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/B%2B%E6%A0%91">b+树维基</a></p>
+<p>📺<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1UC4y1p7zm?from=search&amp;seid=17085138785753425050">彻底理解B树和B+树！为何它们常用在数据库中？</a></p>
+<p>🔗 <a target="_blank" rel="noopener" href="https://blog.ouyangsihai.cn/mian-shi-guan-wen-ni-b-shu-he-b-shu-jiu-ba-zhe-pian-wen-zhang-diu-gei-ta.html">面试官问你B树和B+树，就把这篇文章丢给他</a></p>
+<blockquote>
+<p>B和B+主要用在文件系统以及数据库中做索引</p>
+</blockquote>
+<hr>
+<p><img src=".\7.png" srcset="/img/loading.gif" alt="红黑树大白话理解"></p>
+
             </div>
             <hr>
             <div>
@@ -254,7 +270,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/C/">C++</a>
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
                     
                   </div>
                 
@@ -262,7 +278,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BE%AF%E6%8D%B7-%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91/">-侯捷 -面对对象的高级开发</a>
+                      <a class="hover-with-bg" href="/tags/%E6%9D%82%E8%AE%B0/">-杂记</a>
                     
                   </div>
                 
@@ -275,18 +291,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/12/CPP-STL%E7%BB%BC%E8%BF%B0/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++STL综述</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/01/%E4%BE%AF%E6%8D%B7-ObjectBased/">
-                        <span class="hidden-mobile">侯捷_ObjectBased</span>
+                      <a href="/2021/02/12/CPP-STL%E7%BB%BC%E8%BF%B0/">
+                        <span class="hidden-mobile">C++STL综述</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -312,7 +322,7 @@
           repo: 'gitalk-comment',
           owner: 'qingcai56',
           admin: ["qingcai56"],
-          id: '77345dc9ca289fdafcf11b6fe61fed35',
+          id: 'b0c90a945355fa3dd289e80acce632f4',
           language: 'zh-CN',
           labels: ["Gitalk"],
           perPage: 10,

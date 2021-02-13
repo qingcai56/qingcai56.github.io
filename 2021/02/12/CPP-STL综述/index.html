@@ -17,7 +17,7 @@
   <meta name="description" content="learning">
   <meta name="author" content="qingcai56">
   <meta name="keywords" content="">
-  <title>侯捷_OOP与虚函数 - qingcai56&#39;s blog</title>
+  <title>C++STL综述 - qingcai56&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="侯捷_OOP与虚函数">
+            <span class="h2" id="subtitle" title="C++STL综述">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-03 12:14" pubdate>
-        February 3, 2021 pm
+      <time datetime="2021-02-12 17:42" pubdate>
+        February 12, 2021 pm
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      201 字
+      603 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      6
        分钟
     </span>
   
@@ -224,28 +224,64 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">侯捷_OOP与虚函数</h1>
+            <h1 style="display: none">C++STL综述</h1>
             
             <div class="markdown-body">
-              <h2 id="🌿Composition-複合-has-a"><a href="#🌿Composition-複合-has-a" class="headerlink" title="🌿Composition (複合 has a)"></a>🌿Composition (複合 has a)</h2><p><img src=".\1.png" srcset="/img/loading.gif" alt=""></p>
-<p><img src=".\2.png" srcset="/img/loading.gif" alt=""></p>
-<p><img src=".\3.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="🌿Delegation-委託"><a href="#🌿Delegation-委託" class="headerlink" title="🌿Delegation (委託)"></a>🌿Delegation (委託)</h2><blockquote>
-<p>Composition by reference</p>
+              <h2 id="🌿STL六大部件"><a href="#🌿STL六大部件" class="headerlink" title="🌿STL六大部件"></a>🌿STL六大部件</h2><p><img src=".\1.png" srcset="/img/loading.gif" alt=""></p>
+<ol>
+<li><strong>容器 Containers</strong>：存放我们要操作的数据，可以是数字、对象等； </li>
+<li><strong>分配器 Allocators</strong>：容器需要占用内存，容器占用的内存由分配器分配； </li>
+<li><strong>算法 Algorithms</strong>：被独立出来的模板函数，用来操作容器，包块常见的排序算法、查找算法等； </li>
+<li><strong>迭代器 Iterators</strong>：算法既然要操作容器中的数据，需要有工具访问容器中数据，那就是迭代器，是一种泛化的指针； </li>
+<li><strong>容器适配器 Adapters</strong>：一些容器底层和数据操作具有一定的相似，所以一些容器使用其他容器作为底层数据结构，并将其他容器的函数转换为自己的函数； </li>
+<li><strong>仿函数Functors</strong>：实际上是类中的operator()小括号运算符重载函数，存在类似函数的行为。</li>
+</ol>
+<blockquote>
+<p>迭代器begin()与end()是前闭后开区间，即end()指向最后一个元素的末尾</p>
 </blockquote>
-<p><img src=".\4.png" srcset="/img/loading.gif" alt="Pointer to Implementation"></p>
-<h2 id="🌿Inheritance-繼承，is-a"><a href="#🌿Inheritance-繼承，is-a" class="headerlink" title="🌿Inheritance (繼承，is-a)"></a>🌿Inheritance (繼承，is-a)</h2><p><img src=".\5.png" srcset="/img/loading.gif" alt=""></p>
-<p><img src=".\6.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="🌿虚函数-amp-继承（virtual）"><a href="#🌿虚函数-amp-继承（virtual）" class="headerlink" title="🌿虚函数 &amp; 继承（virtual）"></a>🌿虚函数 &amp; 继承（virtual）</h2><p><img src=".\7.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="🌼template-method"><a href="#🌼template-method" class="headerlink" title="🌼template method"></a>🌼template method</h3><p><img src=".\8.png" srcset="/img/loading.gif" alt="例子：打开磁盘文件"></p>
-<p><img src=".\9.png" srcset="/img/loading.gif" alt="继承with虚函数"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CDocument</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OnFileOpen</span><span class="hljs-params">()</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-comment">// 這是個算法，每個 cout 輸出代表一個實際動作</span><br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;dialog...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;check file status...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;open file...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		Serialize();<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;close file...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;update all views...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Serialize</span><span class="hljs-params">()</span> </span>&#123; &#125;;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CMyDoc</span> :</span> <span class="hljs-keyword">public</span> CDocument<br>&#123;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Serialize</span><span class="hljs-params">()</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-comment">// 只有應用程序本身才知道如何讀取自己的文件(格式)</span><br>		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;CMyDoc::Serialize()&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>	&#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	CMyDoc myDoc; <span class="hljs-comment">// 假設對應[File/Open]</span><br>	myDoc.OnFileOpen();<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="🌿组合"><a href="#🌿组合" class="headerlink" title="🌿组合"></a>🌿组合</h2><h3 id="🌼Inheritance-Composition"><a href="#🌼Inheritance-Composition" class="headerlink" title="🌼Inheritance+Composition"></a>🌼Inheritance+Composition</h3><p><img src=".\10.png" srcset="/img/loading.gif" alt=""></p>
-<p><img src=".\11.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="🌼Delegation-Inheritance"><a href="#🌼Delegation-Inheritance" class="headerlink" title="🌼Delegation + Inheritance"></a>🌼Delegation + Inheritance</h3><h4 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h4><p><img src=".\12.png" srcset="/img/loading.gif" alt="observer"></p>
-<p><img src=".\13.png" srcset="/img/loading.gif" alt="observer应用场景"></p>
-<p><img src=".\14.png" srcset="/img/loading.gif" alt=""></p>
-<h4 id="原型模式🔗（对于复杂对象的创建）"><a href="#原型模式🔗（对于复杂对象的创建）" class="headerlink" title="原型模式🔗（对于复杂对象的创建）"></a><a target="_blank" rel="noopener" href="https://qingcai56.cn/2021/01/27/GoF-%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%BC%8F/#%F0%9F%8C%BFPrototype%EF%BC%88%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%EF%BC%89">原型模式🔗</a>（对于复杂对象的创建）</h4>
+<h2 id="🌿容器结构分类"><a href="#🌿容器结构分类" class="headerlink" title="🌿容器结构分类"></a>🌿容器结构分类</h2><p><img src=".\2.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="🌹顺序容器"><a href="#🌹顺序容器" class="headerlink" title="🌹顺序容器"></a>🌹顺序容器</h3><ul>
+<li>Array 内存顺序存储</li>
+<li>Vector  内存顺序存储，内存不够自动扩充，g++2倍，vc1.5倍。</li>
+<li>Deque <strong>分段</strong>内存顺序存储，同样内存不够自动扩充底层结构是Vector</li>
+<li>List  <strong>环形</strong>链表</li>
+<li>Forward-List <strong>带头结点</strong>单向链表，内存耗用闭list少</li>
+</ul>
+<h3 id="🌹关联容器"><a href="#🌹关联容器" class="headerlink" title="🌹关联容器"></a>🌹关联容器</h3><ul>
+<li>Set/Multiset: 集合/<strong>元素内容可重复（multi）</strong>，底层数据结构是红黑树。</li>
+<li>Map/Multimap： 每个结点带有key，data对，底层数据结构也是红黑树。</li>
+<li>Unordered Set/Multiset：无顺序集合，底层采用链地址法处理冲突的hashtable，如果baket太长查找会比较慢。</li>
+<li>Unordered Map/Multimap：无顺序Map，底层采用链地址法处理冲突的hashtable。</li>
+</ul>
+<blockquote>
+<p>使用一个东西，却不明白它的道理，不高明   ——林语堂</p>
+</blockquote>
+<h2 id="🌿OOP-VS-GP"><a href="#🌿OOP-VS-GP" class="headerlink" title="🌿OOP VS GP"></a>🌿OOP VS GP</h2><p>Object-oriented programming（面对对象的编程）与 Generic Programming(泛型编程)，而STL库就是用GP思想设计的。</p>
+<p><img src=".\3.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src=".\4.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li>使用GP可以使Containers和Algorithms团队分开来各自闭门造车，只要定好Iterator的标准即可。</li>
+<li>Algorithms通过Iterator确定操作范围，并通过Iterator取用Container元素。</li>
+<li>OOP对类进行实例化，我感觉GP更像是用对象对method进行实例化。</li>
+</ul>
+<h2 id="🌿GP必备知识"><a href="#🌿GP必备知识" class="headerlink" title="🌿GP必备知识"></a>🌿GP必备知识</h2><h3 id="🌹Operator-Overloading"><a href="#🌹Operator-Overloading" class="headerlink" title="🌹Operator Overloading"></a>🌹Operator Overloading</h3><p><img src=".\5.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="🌹Templates"><a href="#🌹Templates" class="headerlink" title="🌹Templates"></a>🌹Templates</h3><h4 id="🦊Class-Templates"><a href="#🦊Class-Templates" class="headerlink" title="🦊Class Templates"></a>🦊Class Templates</h4><p><img src=".\6.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="🦊Function-Templates"><a href="#🦊Function-Templates" class="headerlink" title="🦊Function Templates"></a>🦊Function Templates</h4><p><img src=".\7.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="🦊Member-Templates"><a href="#🦊Member-Templates" class="headerlink" title="🦊Member Templates"></a>🦊Member Templates</h4><p><img src=".\8.png" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>模板类之间的赋值问题👇</p>
+</blockquote>
+<p><img src=".\9.png" srcset="/img/loading.gif" alt="问题"></p>
+<p><img src=".\10.png" srcset="/img/loading.gif" alt="解决"></p>
+<h4 id="🦊Specialization特化"><a href="#🦊Specialization特化" class="headerlink" title="🦊Specialization特化"></a>🦊Specialization特化</h4><p><img src=".\11.png" srcset="/img/loading.gif" alt="image-20210213141852707"></p>
+<h4 id="🦊Partial-Specialization偏特化"><a href="#🦊Partial-Specialization偏特化" class="headerlink" title="🦊Partial Specialization偏特化"></a>🦊Partial Specialization偏特化</h4><p><img src=".\12.png" srcset="/img/loading.gif" alt="image-20210213142257919"></p>
+<h2 id="🌿allocator分配器"><a href="#🌿allocator分配器" class="headerlink" title="🌿allocator分配器"></a>🌿allocator分配器</h2><blockquote>
+<p>所有容器的第二个默认模板参数是allocator<T></p>
+</blockquote>
+<p><img src=".\13.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src=".\14.png" srcset="/img/loading.gif" alt="一般alloc只是对new和delete调用，delete是要填数字"></p>
+<p><img src=".\15.png" srcset="/img/loading.gif" alt="G2.9的alloc做法"></p>
+
             </div>
             <hr>
             <div>
@@ -262,7 +298,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BE%AF%E6%8D%B7-%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91/">-侯捷 -面对对象的高级开发</a>
+                      <a class="hover-with-bg" href="/tags/%E4%BE%AF%E6%8D%B7-STL%E5%BA%93/">-侯捷 -STL库</a>
                     
                   </div>
                 
@@ -275,9 +311,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/12/CPP-STL%E7%BB%BC%E8%BF%B0/">
+                      <a href="/2021/02/12/RB-Tree/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++STL综述</span>
+                        <span class="hidden-mobile">RB-Tree</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -285,8 +321,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/01/%E4%BE%AF%E6%8D%B7-ObjectBased/">
-                        <span class="hidden-mobile">侯捷_ObjectBased</span>
+                      <a href="/2021/02/03/%E4%BE%AF%E6%8D%B7-OOP%E4%B8%8E%E8%99%9A%E5%87%BD%E6%95%B0/">
+                        <span class="hidden-mobile">侯捷_OOP与虚函数</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -312,7 +348,7 @@
           repo: 'gitalk-comment',
           owner: 'qingcai56',
           admin: ["qingcai56"],
-          id: '77345dc9ca289fdafcf11b6fe61fed35',
+          id: 'bd53c3db4cab10936e2df16d2bff7432',
           language: 'zh-CN',
           labels: ["Gitalk"],
           perPage: 10,
