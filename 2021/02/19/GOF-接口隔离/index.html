@@ -1,0 +1,615 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shuye.png">
+  <link rel="icon" type="image/png" href="/img/shuye.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="learning">
+  <meta name="author" content="qingcai56">
+  <meta name="keywords" content="">
+  <title>GOF_接口隔离 - qingcai56&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>八百物屋</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/astronaut.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="GOF_接口隔离">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-19 20:02" pubdate>
+        February 19, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">GOF_接口隔离</h1>
+            
+            <div class="markdown-body">
+              <h2 id="🌿“接口隔离”模式"><a href="#🌿“接口隔离”模式" class="headerlink" title="🌿“接口隔离”模式"></a>🌿“接口隔离”模式</h2><p>在组件构建过程中，某些接口之间直接的依赖常常会带来很多问题、甚至根本无法实现。采用添加一层间接（稳定）接口，来隔离本来互相紧密关联的接口是一种常见的解决方案。</p>
+<p><strong>典型模式：</strong></p>
+<ul>
+<li>Facade</li>
+<li>Proxy</li>
+<li>Adapter</li>
+<li>Mediator</li>
+</ul>
+<h2 id="🌿Facade-门面"><a href="#🌿Facade-门面" class="headerlink" title="🌿Facade 门面"></a>🌿Facade 门面</h2><p><img src=".\1.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="🌹动机"><a href="#🌹动机" class="headerlink" title="🌹动机"></a>🌹动机</h3><ul>
+<li>上述方案的问题在于组件的客户和组件中各种复杂的子系统有了过多的耦合，随着外部客户程序和各子系统的演化，这种过多的耦合面临很多变化的挑战。</li>
+<li>如何简化外部客户程序和系统间的交互接口？如何将外部呵护程序的演化和内部子系统的变化中间件的依赖相互解耦？</li>
+</ul>
+<h3 id="🌹模式定义"><a href="#🌹模式定义" class="headerlink" title="🌹模式定义"></a>🌹模式定义</h3><p>为子系统中的一组接口提供一个一致（稳定）的界面，Facade模式定义了一个高层接口，这个接口使得这一子系统更加容易使用（复用）。</p>
+<h3 id="🌹结构"><a href="#🌹结构" class="headerlink" title="🌹结构"></a>🌹结构</h3><p><img src=".\2.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="🌹要点总结"><a href="#🌹要点总结" class="headerlink" title="🌹要点总结"></a>🌹要点总结</h3><ul>
+<li>从客户程序的角度来看，Facade模式简化了整个组件系统的借口对于组件内部与外部客户程序来说，达到了一种“解耦”的效果——内部子系统的任何变化不会影响到facade接口的变化。</li>
+<li>Facade设计模式更注重从架构的层次去看整个系统，而不是单个类的层次。<strong>Facade很多时候更是一种架构模式</strong></li>
+<li>Facade设计模式并非一个集装箱，可以任意地放进任何多个对象。Facade模式中组件的内部应该是“互相耦合关系比较大的一系列组件”，而不是一个简单功能的集合。</li>
+</ul>
+<blockquote>
+<p>虚拟文件系统VFS就是采用这种设计模式</p>
+</blockquote>
+<h2 id="🌿Proxy-代理"><a href="#🌿Proxy-代理" class="headerlink" title="🌿Proxy 代理"></a>🌿Proxy 代理</h2><h3 id="🌹模式定义-1"><a href="#🌹模式定义-1" class="headerlink" title="🌹模式定义"></a>🌹模式定义</h3><p>为其他对象<strong>提供一种代理以控制（隔离、使用接口）对这个对象的访问</strong>。</p>
+<h3 id="🌹动机-1"><a href="#🌹动机-1" class="headerlink" title="🌹动机"></a>🌹动机</h3><ul>
+<li>在面对对象系统中，有些对象由于某种原因（比如对象创建的开销很大，或者某些操作系统需要<strong>安全控制</strong>，或者需要<strong>进程外的访问</strong>等），直接访问会给使用者、或者系统结构带来许多麻烦。</li>
+<li>如何在<strong>不失去透明操作对象的同时来管理/控制这些对象</strong>特有的复杂性？增加一层间接层是软件开发中常见的解决方式。</li>
+</ul>
+<h3 id="🌹代码示例"><a href="#🌹代码示例" class="headerlink" title="🌹代码示例"></a>🌹代码示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ISubject</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">()</span></span>;<br>&#125;;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RealSubject</span>:</span> <span class="hljs-keyword">public</span> ISubject&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-comment">//....</span><br>    &#125;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClientApp</span>&#123;</span><br>    <br>    ISubject* subject;<br>    <br><span class="hljs-keyword">public</span>:<br>    <br>    ClientApp()&#123;<br>        subject=<span class="hljs-keyword">new</span> RealSubject();<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DoTask</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-comment">//...</span><br>        subject-&gt;process();<br>        <br>        <span class="hljs-comment">//....</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ISubject</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">()</span></span>;<br>&#125;;<br><br><br><span class="hljs-comment">//Proxy的设计</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SubjectProxy</span>:</span> <span class="hljs-keyword">public</span> ISubject&#123;<br>    <br>    <br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-comment">//对RealSubject的一种间接访问</span><br>        <span class="hljs-comment">//....</span><br>    &#125;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClientApp</span>&#123;</span><br>    <br>    ISubject* subject;<br>    <br><span class="hljs-keyword">public</span>:<br>    <br>    ClientApp()&#123;<br>        subject=<span class="hljs-keyword">new</span> SubjectProxy();<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DoTask</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-comment">//...</span><br>        subject-&gt;process();<br>        <br>        <span class="hljs-comment">//....</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="🌹结构-1"><a href="#🌹结构-1" class="headerlink" title="🌹结构"></a>🌹结构</h3><p><img src=".\3.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="🌹要点总结-1"><a href="#🌹要点总结-1" class="headerlink" title="🌹要点总结"></a>🌹要点总结</h3><ul>
+<li>“增加一层间接层”是软件系统中对许多复杂问题的一种常见解决方法。在面对对象系统中，直接使用某些对象会带来很多问题，作为间接层的proxy对象便是解决者一问题的常用手段。</li>
+<li>具体proxy设计模式的实现方法、实现粒度都相差很大，有些可能对单个对象做细粒度的控制，如<strong>copy-on-write技术</strong>，有些可能对组件模块提供抽象代理层，在架构层次对对象做proxy。</li>
+<li>proxy并不一定要求保持接口一致的完整性，只要能够实现间接控制，有时候损及一些透明性是可以接受的。</li>
+</ul>
+<blockquote>
+<p>代理人模式，例如现实生活中明星安排活动，活动方和代理人沟通协商细节，明显完成核心工作即可。 在计算机领域的细节：例如安全控制，分布式管理、性能优化什么的。</p>
+</blockquote>
+<h2 id="🌿Adapter-适配器"><a href="#🌿Adapter-适配器" class="headerlink" title="🌿Adapter 适配器"></a>🌿Adapter 适配器</h2><h3 id="🌹模式定义-2"><a href="#🌹模式定义-2" class="headerlink" title="🌹模式定义"></a>🌹模式定义</h3><p>将一个类的接口转换成客户希望的另一个接口，Adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</p>
+<h3 id="🌹动机-2"><a href="#🌹动机-2" class="headerlink" title="🌹动机"></a>🌹动机</h3><ul>
+<li>在软件系统中，由于应用环境的变化，常常需要将“一些现存的对象”放在新环境中应用，但是新环境的接口是这些现存对象所不满足的。</li>
+<li>如何应对这种“迁移的变化”？如何既能利用现有对象的良好实现，同时又能满足新的应用环境所要求的接口？</li>
+</ul>
+<p><img src=".\4.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="🌹代码示例-1"><a href="#🌹代码示例-1" class="headerlink" title="🌹代码示例"></a>🌹代码示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//目标接口（新接口）</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ITarget</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>&#125;;<br><br><span class="hljs-comment">//遗留接口（老接口）</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IAdaptee</span>&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> data)</span></span>=<span class="hljs-number">0</span>;<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span></span>=<span class="hljs-number">0</span>;<br>&#125;;<br><br><span class="hljs-comment">//遗留类型</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OldClass</span>:</span> <span class="hljs-keyword">public</span> IAdaptee&#123;<br>    <span class="hljs-comment">//....</span><br>&#125;;<br><br><span class="hljs-comment">//对象适配器</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adapter</span>:</span> <span class="hljs-keyword">public</span> ITarget&#123; <span class="hljs-comment">//继承</span><br><span class="hljs-keyword">protected</span>:<br>    IAdaptee* pAdaptee;<span class="hljs-comment">//组合</span><br>    <br><span class="hljs-keyword">public</span>:<br>    <br>    Adapter(IAdaptee* pAdaptee)&#123;<br>        <span class="hljs-keyword">this</span>-&gt;pAdaptee=pAdaptee;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">int</span> data=pAdaptee-&gt;bar();<br>        pAdaptee-&gt;foo(data);<br>        <br>    &#125;<br>    <br>    <br>&#125;;<br><br><br><span class="hljs-comment">//类适配器</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adapter</span>:</span> <span class="hljs-keyword">public</span> ITarget,<br>               <span class="hljs-keyword">protected</span> OldClass&#123; <span class="hljs-comment">//多继承</span><br>               <br>               <br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    IAdaptee* pAdaptee=<span class="hljs-keyword">new</span> OldClass();<br>    <br>    <br>    ITarget* pTarget=<span class="hljs-keyword">new</span> Adapter(pAdaptee);<br>    pTarget-&gt;process();<br>    <br>    <br>&#125;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">stack</span>&#123;</span><br>    deqeue container;<br>    <br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">queue</span>&#123;</span><br>    deqeue container;<br>    <br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="🌹结构-2"><a href="#🌹结构-2" class="headerlink" title="🌹结构"></a>🌹结构</h3><p><img src=".\5.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="🌹要点总结-2"><a href="#🌹要点总结-2" class="headerlink" title="🌹要点总结"></a>🌹要点总结</h3><ul>
+<li>Adapter模式主要应用于“希望复用一些现存的类，但是接口又与复用环境要求不一致的情况”，在遗留代码复用，类库迁移等方面非常有用。</li>
+<li>GoF 23定义了两种Adapter模式的实现结构：对象适配器和类适配器。<strong>单类适配器采用“多继承”的实现方式，一般不推荐使用。</strong>对象适配器采用“对象组合”的方式，更符合松耦合精神。</li>
+<li>Adapter模式可以实现的非常灵活，不必拘泥于Gof23中定义的两种结构。例如，完全可以将Adapter模式种的“现存对象”作为新的接口方法参数，来达到适配的目的。</li>
+</ul>
+<blockquote>
+<p>如C++STL库中stack和queue就是deque的一种适配器，map和set就是rb_tree的适配器。</p>
+</blockquote>
+<h2 id="🌿Mediator-中介者"><a href="#🌿Mediator-中介者" class="headerlink" title="🌿Mediator 中介者"></a>🌿Mediator 中介者</h2><h3 id="🌹模式定义-3"><a href="#🌹模式定义-3" class="headerlink" title="🌹模式定义"></a>🌹模式定义</h3><p>用一个中介对象来封装（封装变化）一系列的对象交互。中介者使得各个对象不需要显示的互相引用（<strong>编译时依赖—&gt;运行时依赖</strong>），从而使其耦合松散（管理变化），而且可以独立地改变它们之间地交互。</p>
+<h3 id="🌹动机-3"><a href="#🌹动机-3" class="headerlink" title="🌹动机"></a>🌹动机</h3><ul>
+<li>在软件构建过程中，经常会出现多个对象互相关联交互地情况，对象之间常常会维持一种复杂地引用关系，如果遇到一些需求地更改，这种直接地引用关系将面临不断地变化。</li>
+<li>在这种情况下，我们可以使用一个“中介对象”来管理对象间地关联关系，避免互相交互的对象之间的紧耦合引用关系，从而跟好地抵御变化。</li>
+</ul>
+<p><img src=".\6.jpg" srcset="/img/loading.gif" alt="电话线从每两用户都有一根到星型结构中控管理"></p>
+<h3 id="🌹结构-3"><a href="#🌹结构-3" class="headerlink" title="🌹结构"></a>🌹结构</h3><p><img src=".\7.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="🌹要点总结-3"><a href="#🌹要点总结-3" class="headerlink" title="🌹要点总结"></a>🌹要点总结</h3><ul>
+<li>将多个对象间复杂的关联关系解耦，Mediator模式将多个对象间的控制逻辑进行机制管理，<strong>变“多个对象互相关联”为“多个对象和一个中介者关联”</strong>，简化了系统维护，抵御了可能变化。</li>
+<li>随着控制逻辑的复杂化，Mediator具体对象的实现可能相当复杂。这时候可以对Mediator对象进行分解处理。</li>
+<li>Facade模式是解耦系统间（单向）的对象关联关系；Mediator模式是解耦系统内各个对象之间（双向）的关联关系。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-cpp-%E6%9D%8E%E5%BB%BA%E5%BF%A0/">-设计模式 -cpp -李建忠</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/17/GOF-%E5%AF%B9%E8%B1%A1%E6%80%A7%E8%83%BD/">
+                        <span class="hidden-mobile">GOF_性能对象</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '4c1cc64f58db04df20d1',
+          clientSecret: '60df911ad9c5263324a2797ea783b31c4f05eb92',
+          repo: 'gitalk-comment',
+          owner: 'qingcai56',
+          admin: ["qingcai56"],
+          id: 'd5a7b27cbd7377a973d57594828a3232',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200&display=swap" rel="stylesheet">
+        </div>
+      </div>
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
