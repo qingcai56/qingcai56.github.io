@@ -1,0 +1,593 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/shuye.png">
+  <link rel="icon" type="image/png" href="/img/shuye.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="learning">
+  <meta name="author" content="qingcai56">
+  <meta name="keywords" content="">
+  <title>王道数据结构-第四章串 - qingcai56&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>八百物屋</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/astronaut.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="王道数据结构-第四章串">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-09 19:05" pubdate>
+        April 9, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      842 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">王道数据结构-第四章串</h1>
+            
+            <div class="markdown-body">
+              <h1 id="串"><a href="#串" class="headerlink" title="串"></a>串</h1><blockquote>
+<p>数据结构三要素——逻辑结构、数据的运算、存储结构</p>
+</blockquote>
+<h2 id="🌿串的逻辑结构"><a href="#🌿串的逻辑结构" class="headerlink" title="🌿串的逻辑结构"></a>🌿串的逻辑结构</h2><p>串、即字符串（String）是由<em>零个或多个字符</em>组成的有限序列。一般记为S=’a1a2…an’(n&gt;=0)</p>
+<ol>
+<li>S是<code>串名</code>单引号，单/双引号括起来的字符序列是串的值；</li>
+<li>a<sub>n</sub>可以是字母、数字或其他字符；</li>
+<li>串中字<code>符的个数是串的长度</code>n=0为空串；</li>
+<li>概念区分：子串、主串、字符串再主串中的位置（第一次出现）、子串在主串中的位置（子串的第一个字符在主串中的位置）。</li>
+</ol>
+<p><img src=".\1.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src=".\2.png" srcset="/img/loading.gif" alt="串的基本操作、增删改查主要以子串为操作对象"></p>
+<h2 id="🌿串的存储结构"><a href="#🌿串的存储结构" class="headerlink" title="🌿串的存储结构"></a>🌿串的存储结构</h2><p><img src=".\3.png" srcset="/img/loading.gif" alt="字符串的设计方案"></p>
+<p>方案二好像是Pascal语言的设计，方案三就是c语言的设计，各有优劣，存字符串长度虽然很便捷地判断字符串越界的问题，但是无法存储大型字符串（如果length和char一样的存储空间，那字符串最多存256位字符）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//静态数组</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXLEN = <span class="hljs-number">255</span>;<br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-keyword">char</span> ch[MAXLEN];<br>	<span class="hljs-keyword">int</span> length;<br>&#125;SString;<br><br><span class="hljs-comment">//动态数组</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-keyword">char</span>* ch;<br>	<span class="hljs-keyword">int</span> length;<br>&#125;HString;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">hStringInit</span><span class="hljs-params">(HString&amp; S)</span></span><br><span class="hljs-function"></span>&#123;<br>	S.ch = (<span class="hljs-keyword">char</span>*)<span class="hljs-built_in">malloc</span>(MAXLEN * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">char</span>));<br>	S.length = <span class="hljs-number">0</span>;<br>	<span class="hljs-comment">//用完了以后记得free</span><br>&#125;;<br><span class="hljs-comment">//链式存储</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">StringNode</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-keyword">char</span> ch;	<span class="hljs-comment">//每个结点存一个字符</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">StringNode</span>* <span class="hljs-title">next</span>;</span><br>&#125;StringNode,* String;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">StringNode</span> </span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-keyword">char</span> ch[<span class="hljs-number">4</span>]; <span class="hljs-comment">//每个结点存多个字符</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">StringNode</span>* <span class="hljs-title">next</span>;</span><br>&#125;StringNode,*<span class="hljs-built_in">string</span>;<br></code></pre></td></tr></table></figure>
+<p><img src=".\4.png" srcset="/img/loading.gif" alt="静态数组的实现"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs c++"><br><span class="hljs-comment">/*以下都是基于静态数组实现*/</span><br><span class="hljs-comment">//注意这种设计0号元素不使用,求子串</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">SubString</span><span class="hljs-params">(SString&amp; Sub, SString S, <span class="hljs-keyword">int</span> pos, <span class="hljs-keyword">int</span> len)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (pos+len<span class="hljs-number">-1</span>&gt;S.length)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=pos; i&lt;pos+len; i++)<br>	&#123;<br>		Sub.ch[i-pos+<span class="hljs-number">1</span>] = S.ch[i];	<br>	&#125;<br>	Sub.length = len;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;	<br>&#125;<br><br><span class="hljs-comment">//S&gt;T ?</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">StrCompare</span><span class="hljs-params">(SString&amp; S, SString&amp; T)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;=S.length &amp;&amp; i&lt;=T.length; i++)<br>	&#123;<br>		<span class="hljs-keyword">if</span> (S.ch[i]!=T.ch[i])<br>		&#123;<br>			<span class="hljs-keyword">return</span> S.ch[i] - T.ch[i];<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> S.length - T.length;<br>&#125;<br><br><span class="hljs-comment">//主串中找子串的起始位</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">index</span><span class="hljs-params">(SString&amp; S, SString&amp; T)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>, n = S.length, m = T.length;<br>	SString sub;<br>	<span class="hljs-keyword">while</span> (i&lt;=n-m+<span class="hljs-number">1</span>)<br>	&#123;<br>		SubString(sub, S, i, m);<br>		<span class="hljs-keyword">if</span> (StrCompare(sub, T) != <span class="hljs-number">0</span>) ++i;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> i;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="🌿朴素模式匹配算法"><a href="#🌿朴素模式匹配算法" class="headerlink" title="🌿朴素模式匹配算法"></a>🌿朴素模式匹配算法</h2><p>串的模式匹配：在<code>主串</code>中找到与<code>模式串</code>相同的子串，并返回其所在的位置（模式串不一定在主串中存在）。</p>
+<p><img src=".\5.png" srcset="/img/loading.gif" alt=""></p>
+<p>与上面的index思路一样，只不过没有调用其他函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">index</span><span class="hljs-params">(SString&amp; S, SString&amp; T)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>, j = <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span> (i&lt;S.length &amp;&amp; j&lt;T.length)<br>	&#123;<br>		<span class="hljs-keyword">if</span> (S.ch[i]==T.ch[j])<br>		&#123;	<br>			i++;<br>			j++;<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			<span class="hljs-comment">//检查下一个子串</span><br>			i = i-j+<span class="hljs-number">2</span>;<br>			j = <span class="hljs-number">1</span>;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">if</span> (j &gt; T.length)<br>		<span class="hljs-keyword">return</span> k;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src=".\6.png" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>时间负责度</p>
+<p>匹配成功的最好情况: O(m)</p>
+<p>匹配失败的最好情况: O(n-m+1)=O(n-m)≈O(n)（主串&gt;&gt;子串）</p>
+<p>最坏的匹配失败情况:O(nm) 要进行(n-m+1)*m次比较</p>
+</blockquote>
+<h2 id="🌿KMP算法"><a href="#🌿KMP算法" class="headerlink" title="🌿KMP算法"></a>🌿KMP算法</h2><blockquote>
+<p>该算法由D.E.<code>K</code>nuth，J.H.<code>M</code>orris和V.R.<code>P</code>ratt提出，故称为KMP算法，尽量让主串中的指针i少回溯（kmp算法中i不回溯，每次匹配不成功子串指针j回溯到不同的值）</p>
+</blockquote>
+<p><img src=".\7.png" srcset="/img/loading.gif" alt="只有经常回溯的情形，kmp算法才比朴素模式匹配算法的效率高，朴素模式匹配仍广泛使用"></p>
+<p><img src=".\8.png" srcset="/img/loading.gif" alt="关键是弄出匹配不成功的next回溯数组，此时next数组没优化,j=0特意让i,j++"></p>
+<h3 id="手算"><a href="#手算" class="headerlink" title="手算"></a>手算</h3><p><img src=".\9.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src=".\10.png" srcset="/img/loading.gif" alt="最长前后缀匹配"></p>
+<p><img src=".\11.png" srcset="/img/loading.gif" alt="手算公式"></p>
+<blockquote>
+<p>0 1 1 2 3 4</p>
+</blockquote>
+<p><img src=".\12.png" srcset="/img/loading.gif" alt="next数组的求法"></p>
+<blockquote>
+<p>O（m+n）的平均时间复杂度，m来自求next数组，n来至kmp主串的循环</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV16X4y137qw?from=search&amp;seid=9853816396099079128">🎞动态规划思想之kmp(看门排算法)数组的求法</a></p>
+<p><img src=".\13.png" srcset="/img/loading.gif" alt="kmp算法的优化"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%80%83%E7%A0%94-%E7%8E%8B%E9%81%93/">-考研 -王道</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/28/%E7%8E%8B%E9%81%93%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/">
+                        <span class="hidden-mobile">王道数据结构-第三章栈与队列</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '4c1cc64f58db04df20d1',
+          clientSecret: '60df911ad9c5263324a2797ea783b31c4f05eb92',
+          repo: 'gitalk-comment',
+          owner: 'qingcai56',
+          admin: ["qingcai56"],
+          id: '737dc81d4e64ac9ba57a1e81eb4fc1e5',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200&display=swap" rel="stylesheet">
+        </div>
+      </div>
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
